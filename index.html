@@ -183,25 +183,39 @@ text-align:center;
 }
 </style>
 </head>
+	
 <body>
 
-	<div id="home" class="box">
-<h1>🤓 EduHealth 🍀</h1>
-<p>Chọn chức năng bạn muốn</p>
+<body>
 
-<div class="menu-card" onclick="openPage('health')">
-<h2>💚 Đánh giá sức khỏe</h2>
-<p>Tính BMI + đánh giá thói quen sống</p>
+<div class="box" id="home">
+    <h1>🤓 EduHealth 🍀</h1>
+    <p>Chọn chức năng bạn muốn</p>
+
+    <div onclick="openPage('health')" style="
+    background:#e8f5e9;
+    padding:30px;
+    border-radius:20px;
+    margin:20px 0;
+    cursor:pointer;
+    text-align:center;">
+        <h2>🩺 Đánh giá sức khỏe</h2>
+        <p>Tính BMI + đánh giá thói quen sống</p>
+    </div>
+
+    <div onclick="openPage('workout')" style="
+    background:#fff8e1;
+    padding:30px;
+    border-radius:20px;
+    cursor:pointer;
+    text-align:center;">
+        <h2>🏋️ Bài tập sức khỏe</h2>
+        <p>Bài tập theo mục tiêu</p>
+    </div>
 </div>
 
-<div class="menu-card" onclick="openPage('workout')">
-<h2>🏋️ Bài tập sức khỏe</h2>
-<p>Luyện tập theo mục tiêu cá nhân</p>
-</div>
-</div>
-	
-<div id="health" class="box" style="display:none;">
-<button onclick="goHome()">⬅️ Quay lại</button>
+<div class="box" id="health" style="display:none;">
+    <button onclick="goHome()">⬅ Quay lại</button>
     <h1>🤓 EduHealth 🍀 </h1>
     <p>Nhập thông tin để đánh giá sức khỏe của bạn</p>
 
@@ -250,30 +264,45 @@ text-align:center;
 
 <div id="meo"></div>
 </div>
+
+<div class="box" id="workout" style="display:none;">
+    <button onclick="goHome()">⬅ Quay lại</button>
+
+    <h2>🏋️ Bài tập sức khỏe</h2>
+
+    <select id="goal" onchange="showWorkout()">
+      <option value="height">📏 Tăng chiều cao</option>
+      <option value="lose">🔥 Giảm mỡ</option>
+      <option value="gain">💪 Tăng cơ</option>
+      <option value="student">📚 Chống mỏi</option>
+    </select>
+
+    <div id="workoutBox" style="
+    margin-top:20px;
+    padding:20px;
+    border-radius:15px;
+    background:#f8fff8;
+    text-align:center;"></div>
+
+    <button onclick="prevWorkout()">⬅️ Trước</button>
+    <button onclick="nextWorkout()">Tiếp ➡️</button>
 </div>
 
-<div id="workout" class="box" style="display:none;">
-<button onclick="goHome()">⬅️ Quay lại</button>
-<h2>🏋️ Bài tập sức khỏe</h2>
+<script>
+function openPage(page){
+document.getElementById("home").style.display="none";
+document.getElementById("health").style.display="none";
+document.getElementById("workout").style.display="none";
+document.getElementById(page).style.display="block";
+}
 
-<select id="goal" onchange="showWorkout()">
-  <option value="height">📏 Tăng chiều cao</option>
-  <option value="lose">🔥 Giảm mỡ</option>
-  <option value="gain">💪 Tăng cân</option>
-  <option value="student">📚 Chống mệt mỏi</option>
-</select>
-
-<div id="workoutBox" style="
-margin-top:20px;
-padding:20px;
-border-radius:15px;
-background:#f8fff8;
-text-align:center;">
-</div>
-
-<button onclick="prevWorkout()">⬅️ Trước</button>
-<button onclick="nextWorkout()">Tiếp ➡️</button>
-</div>
+function goHome(){
+document.getElementById("home").style.display="block";
+document.getElementById("health").style.display="none";
+document.getElementById("workout").style.display="none";
+}
+</script>
+</body>
 	
 <script>
 function openPage(page){
