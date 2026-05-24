@@ -687,9 +687,9 @@ gain:[
 ],
 
 student:[
-{name:"Giãn cổ",img:"https://cdn-icons-png.flaticon.com/512/2936/2936858.png",desc:"2 phút"},
-{name:"Thư giãn mắt",img:"https://cdn-icons-png.flaticon.com/512/565/565547.png",desc:"20 giây"},
-{name:"Hít thở sâu",img:"https://share.google/J87lHh9HTl8nBeM1E",desc:"5 phút"}
+{name:"Giãn cổ",img:"https://raw.githubusercontent.com/nguyennhuquynh0902/baitapco/main/baitapco.jpgz",desc:"2 phút"},
+{name:"Thư giãn mắt",img:"https://raw.githubusercontent.com/nguyennhuquynh0902/baitapmat/main/baitapmat.jpg",desc:"20 giây"},
+{name:"Hít thở sâu",img:"https://raw.githubusercontent.com/nguyennhuquynh0902/hitthosau/main/hitthosau.mp4",desc:"5 phút"}
 ]
 };
 
@@ -699,25 +699,24 @@ function showWorkout(){
 let goal=document.getElementById("goal").value;
 let w=workouts[goal][current];
 
-document.getElementById("workoutBox").innerHTML=
-`<h3>${w.name}</h3>
-<img src="${w.img}" width="140">
-<p>${w.desc}</p>`;
+let media = "";
+
+if(w.video){
+media = `
+<video width="220" autoplay loop muted playsinline>
+<source src="${w.video}" type="video/mp4">
+</video>`;
+}
+else if(w.img){
+media = `<img src="${w.img}" width="220">`;
 }
 
-function nextWorkout(){
-let goal=document.getElementById("goal").value;
-current=(current+1)%workouts[goal].length;
-showWorkout();
+document.getElementById("workoutBox").innerHTML=`
+<h3>${w.name}</h3>
+${media}
+<p>${w.desc}</p>
+`;
 }
-
-function prevWorkout(){
-let goal=document.getElementById("goal").value;
-current=(current-1+workouts[goal].length)%workouts[goal].length;
-showWorkout();
-}
-
-showWorkout();
 </script>
 </body>
 </html>
