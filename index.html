@@ -213,6 +213,26 @@ body.bad {
 <div id="meo"></div>
 </div>
 
+<h2>🏋️ Bài tập sức khỏe</h2>
+
+<select id="goal" onchange="showWorkout()">
+  <option value="height">📏 Tăng chiều cao</option>
+  <option value="lose">🔥 Giảm mỡ</option>
+  <option value="gain">💪 Tăng cân</option>
+  <option value="student">📚 Cho học sinh</option>
+</select>
+
+<div id="workoutBox" style="
+margin-top:20px;
+padding:20px;
+border-radius:15px;
+background:#f8fff8;
+text-align:center;">
+</div>
+
+<button onclick="prevWorkout()">⬅️ Trước</button>
+<button onclick="nextWorkout()">Tiếp ➡️</button>
+	
 <script>
 
 function tinhKetQua() {
@@ -545,6 +565,57 @@ function lamLai() {
   document.getElementById("bmiSection").style.display = "none";
 document.body.className = "";
 document.getElementById("meo").innerHTML = "";
-} </script>
+}
+	const workouts = {
+height:[
+{name:"Hít xà",img:"https://cdn-icons-png.flaticon.com/512/3043/3043886.png",desc:"3 hiệp × 8"},
+{name:"Nhảy dây",img:"https://cdn-icons-png.flaticon.com/512/2936/2936886.png",desc:"15 phút"},
+{name:"Rắn hổ mang",img:"https://cdn-icons-png.flaticon.com/512/2964/2964514.png",desc:"30 giây"},
+{name:"Bơi mô phỏng",img:"https://cdn-icons-png.flaticon.com/512/1684/1684375.png",desc:"20 lần"}
+],
+
+lose:[
+{name:"Burpees",img:"https://cdn-icons-png.flaticon.com/512/3043/3043882.png",desc:"15 lần"},
+{name:"Plank",img:"https://cdn-icons-png.flaticon.com/512/2936/2936884.png",desc:"45 giây"},
+{name:"Jumping Jack",img:"https://cdn-icons-png.flaticon.com/512/2936/2936891.png",desc:"50 lần"}
+],
+
+gain:[
+{name:"Push-up",img:"https://cdn-icons-png.flaticon.com/512/3043/3043901.png",desc:"15 lần"},
+{name:"Squat",img:"https://cdn-icons-png.flaticon.com/512/3043/3043907.png",desc:"20 lần"}
+],
+
+student:[
+{name:"Giãn cổ",img:"https://cdn-icons-png.flaticon.com/512/2936/2936858.png",desc:"2 phút"},
+{name:"Thư giãn mắt",img:"https://cdn-icons-png.flaticon.com/512/565/565547.png",desc:"20 giây"}
+]
+};
+
+let current=0;
+
+function showWorkout(){
+let goal=document.getElementById("goal").value;
+let w=workouts[goal][current];
+
+document.getElementById("workoutBox").innerHTML=
+`<h3>${w.name}</h3>
+<img src="${w.img}" width="140">
+<p>${w.desc}</p>`;
+}
+
+function nextWorkout(){
+let goal=document.getElementById("goal").value;
+current=(current+1)%workouts[goal].length;
+showWorkout();
+}
+
+function prevWorkout(){
+let goal=document.getElementById("goal").value;
+current=(current-1+workouts[goal].length)%workouts[goal].length;
+showWorkout();
+}
+
+showWorkout();
+</script>
 </body>
 </html>
