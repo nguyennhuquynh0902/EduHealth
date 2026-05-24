@@ -181,6 +181,21 @@ border-radius:15px;
 background:#f8fff8;
 text-align:center;
 }
+#workoutBox img{
+  width:220px;
+  height:220px;
+  object-fit:contain;
+  border-radius:18px;
+  margin:15px 0;
+  background:#fff;
+  box-shadow:0 8px 20px rgba(0,0,0,0.15);
+  animation: float 2s ease-in-out infinite;
+}
+
+@keyframes float{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-8px);}
+}
 </style>
 </head>
 	
@@ -274,7 +289,7 @@ text-align:center;
       <option value="height">📏 Tăng chiều cao</option>
       <option value="lose">🔥 Giảm mỡ</option>
       <option value="gain">💪 Tăng cơ</option>
-      <option value="student">📚 Chống mỏi</option>
+      <option value="student">📚 Chống mệt mỏi</option>
     </select>
 
     <div id="workoutBox" style="
@@ -651,26 +666,30 @@ document.getElementById("meo").innerHTML = "";
 }
 	const workouts = {
 height:[
-{name:"Hít xà",img:"https://cdn-icons-png.flaticon.com/512/3043/3043886.png",desc:"3 hiệp × 8"},
-{name:"Nhảy dây",img:"https://cdn-icons-png.flaticon.com/512/2936/2936886.png",desc:"15 phút"},
+{name:"Hít xà",img:"https://share.google/aS99Q46BciH8vGAFM",desc:"8 cái x 3 lần"},
+{name:"Nhảy dây",img:"https://share.google/QTEYiVquMuw1jgWSQ",desc:"10 phút"},
 {name:"Rắn hổ mang",img:"https://cdn-icons-png.flaticon.com/512/2964/2964514.png",desc:"30 giây"},
-{name:"Bơi mô phỏng",img:"https://cdn-icons-png.flaticon.com/512/1684/1684375.png",desc:"20 lần"}
+{name:"Calf Stretch",img:"https://share.google/fxYfiNdtRWya42zBf",desc:"30 giây x 3 lần"}
 ],
 
 lose:[
-{name:"Burpees",img:"https://cdn-icons-png.flaticon.com/512/3043/3043882.png",desc:"15 lần"},
+{name:"Gập bụng",img:"https://share.google/wG3I5GMKudhNnPjOm",desc:"15 lần"},
 {name:"Plank",img:"https://cdn-icons-png.flaticon.com/512/2936/2936884.png",desc:"45 giây"},
-{name:"Jumping Jack",img:"https://cdn-icons-png.flaticon.com/512/2936/2936891.png",desc:"50 lần"}
+{name:"Jumping Jack",img:"https://share.google/7WYXtE6i6KJgnhfbW",desc:"35 lần"},
+{name:"Chống tay leo núi",img:"https://share.google/6mtwVqoXKaaXLtoBi",desc:"30 giây x 4 hiệp ( mỗi hiệp nghỉ 30 giây)"}
 ],
 
 gain:[
-{name:"Push-up",img:"https://cdn-icons-png.flaticon.com/512/3043/3043901.png",desc:"15 lần"},
+{name:"Push-up",img:https://share.google/FZLUy54IAKVs8tENu",desc:"20 lần"},
+{name:"Plank",img:"https://cdn-icons-png.flaticon.com/512/2936/2936884.png",desc:"45 giây"},
+ {name:"Bicycle Crunches",img:"https://share.google/Fk2gAw40vws4BMxv1",desc:"20 lần (Lưu ý: Không dùng tay kéo căng cổ, hãy dùng lực chính từ cơ bụng để nâng và vặn người)"},
 {name:"Squat",img:"https://cdn-icons-png.flaticon.com/512/3043/3043907.png",desc:"20 lần"}
 ],
 
 student:[
 {name:"Giãn cổ",img:"https://cdn-icons-png.flaticon.com/512/2936/2936858.png",desc:"2 phút"},
-{name:"Thư giãn mắt",img:"https://cdn-icons-png.flaticon.com/512/565/565547.png",desc:"20 giây"}
+{name:"Thư giãn mắt",img:"https://cdn-icons-png.flaticon.com/512/565/565547.png",desc:"20 giây"},
+{name:"Hít thở sâu",img:"https://share.google/J87lHh9HTl8nBeM1E",desc:"5 phút"}
 ]
 };
 
