@@ -158,12 +158,50 @@ body.bad {
   border-radius: 5px;
   transition: left 0.6s ease;
 }
+.menu-card{
+background:#f8fff8;
+padding:25px;
+margin-top:20px;
+border-radius:20px;
+cursor:pointer;
+text-align:center;
+transition:.3s;
+box-shadow:0 4px 12px rgba(0,0,0,0.1);
+}
 
+.menu-card:hover{
+transform:scale(1.04);
+background:#e8f5e9;
+}
+
+#workoutBox{
+margin-top:20px;
+padding:20px;
+border-radius:15px;
+background:#f8fff8;
+text-align:center;
+}
 </style>
 </head>
 <body>
 
-<div class="box">
+	<div id="home" class="box">
+<h1>🤓 EduHealth 🍀</h1>
+<p>Chọn chức năng bạn muốn</p>
+
+<div class="menu-card" onclick="openPage('health')">
+<h2>💚 Đánh giá sức khỏe</h2>
+<p>Tính BMI + đánh giá thói quen sống</p>
+</div>
+
+<div class="menu-card" onclick="openPage('workout')">
+<h2>🏋️ Bài tập sức khỏe</h2>
+<p>Luyện tập theo mục tiêu cá nhân</p>
+</div>
+</div>
+	
+<div id="health" class="box" style="display:none;">
+<button onclick="goHome()">⬅️ Quay lại</button>
     <h1>🤓 EduHealth 🍀 </h1>
     <p>Nhập thông tin để đánh giá sức khỏe của bạn</p>
 
@@ -212,14 +250,17 @@ body.bad {
 
 <div id="meo"></div>
 </div>
+</div>
 
+<div id="workout" class="box" style="display:none;">
+<button onclick="goHome()">⬅️ Quay lại</button>
 <h2>🏋️ Bài tập sức khỏe</h2>
 
 <select id="goal" onchange="showWorkout()">
   <option value="height">📏 Tăng chiều cao</option>
   <option value="lose">🔥 Giảm mỡ</option>
   <option value="gain">💪 Tăng cân</option>
-  <option value="student">📚 Cho học sinh</option>
+  <option value="student">📚 Chống mệt mỏi</option>
 </select>
 
 <div id="workoutBox" style="
@@ -232,9 +273,22 @@ text-align:center;">
 
 <button onclick="prevWorkout()">⬅️ Trước</button>
 <button onclick="nextWorkout()">Tiếp ➡️</button>
+</div>
 	
 <script>
+function openPage(page){
+document.getElementById("home").style.display="none";
+document.getElementById("health").style.display="none";
+document.getElementById("workout").style.display="none";
 
+document.getElementById(page).style.display="block";
+}
+
+function goHome(){
+document.getElementById("home").style.display="block";
+document.getElementById("health").style.display="none";
+document.getElementById("workout").style.display="none";
+}
 function tinhKetQua() {
   let diem = 0;
   
