@@ -1,530 +1,788 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8">
-<title>🤓 EduHealth 🍀</title>
+  <meta charset="UTF-8">
+  <title>🤓 EduHealth 🍀 </title>
 
-<style>
-*{
-  box-sizing:border-box;
+  <style>
+  * {
+  box-sizing: border-box;
 }
 
-body{
-  margin:0;
-  min-height:100vh;
-  font-family:'Segoe UI',Arial,sans-serif;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  transition:0.5s;
-  background:#f5f5f5;
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.5s ease;
 }
 
-.box{
-  background:rgba(255,252,245,0.96);
-  width:430px;
-  padding:25px 30px;
-  border-radius:20px;
-  animation:fadeIn .5s ease;
+.box {
+  background: rgba(255, 252, 245, 0.95);
+  width: 420px;
+  padding: 25px 30px;
+  border-radius: 20px;
 }
 
-@keyframes fadeIn{
-  from{
-    opacity:0;
-    transform:translateY(15px);
-  }
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
+h1 {
+    text-align: center;
+    color: #4f6f52;
+    font-weight: 600;
+}
+p {
+    text-align: center;
+    color: #555;
+    margin-bottom: 20px;
 }
 
-h1,h2{
-  text-align:center;
-  color:#4f6f52;
+label {
+    display: block;
+    margin-top: 12px;
+    font-weight: 600;
+    color: #333;
 }
 
-p{
-  text-align:center;
-  color:#555;
+input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 6px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 14px;
 }
 
-label{
-  display:block;
-  margin-top:12px;
-  font-weight:600;
+input:focus {
+    outline: none;
+    border-color: #2c7be5;
+    box-shadow: 0 0 5px rgba(44,123,229,0.5);
 }
 
-input,select{
-  width:100%;
-  padding:10px;
-  margin-top:6px;
-  border-radius:10px;
-  border:1px solid #ccc;
-  font-size:14px;
+button {
+    width: 100%;
+    margin-top: 20px;
+    padding: 12px;
+    border: none;
+    border-radius: 14px;
+    font-size: 16px;
+    font-weight: bold;
+    background: #7fb77e;
+    color: white;
+    cursor: pointer;
 }
 
-input:focus,
-select:focus{
-  outline:none;
-  border-color:#2c7be5;
-  box-shadow:0 0 5px rgba(44,123,229,0.5);
+button:hover {
+    background: #6aa76a;
+}
+button:last-of-type { 
+background: #9e9e9e;
+margin-top: 8px;
+} 
+button:last-of-type:hover {
+background: #757575	
 }
 
-button{
-  width:100%;
-  margin-top:15px;
-  padding:12px;
-  border:none;
-  border-radius:14px;
-  font-size:16px;
-  font-weight:bold;
-  background:#7fb77e;
-  color:white;
-  cursor:pointer;
+#ketqua {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 12px;
+    background: #f1f7ff;
+    color: #333;
+    font-size: 14px;
+} 
+
+ /* ===== ĐỔI NỀN THEO SỨC KHOẺ =====*/  
+body.good {
+  background-color: #c8f7c5 !important;
+}
+body.ok {
+  background-color: #fff3b0 !important;
+}
+body.bad {
+  background-color: #e57373 !important;
+} 
+.box {
+  animation: fadeIn 0.6s ease;
 }
 
-button:hover{
-  background:#6aa76a;
+#meo {
+  margin-top: 15px;
+  padding: 12px;
+  border-radius: 12px;
+  background: #e8f5e9;
+  color: #2e7d32;
+  font-size: 14px;
+  font-style: italic;
+ }  
+  #meo h3{ 
+  margin-bottom: 8px;
+  color: #d17b0f;
+} 
+
+ /* ===== THANH BMI ===== */
+.bmi-bar {
+  position: relative;
+  display: flex;
+  height: 55px;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-top: 20px;
+  font-size: 13px;
+  font-weight: 600;
 }
 
-.secondary{
-  background:#9e9e9e;
+/* Chia đúng tỷ lệ 10 → 40 */
+.under  { width: 17%; background: #6EC1E4; }   /* xanh dương nhạt */
+.normal { width: 13%; background: #8BC34A; }   /* xanh lá */
+.over   { width: 10%; background: #F4D03F; }   /* vàng */
+.obese1  { width: 20%; background: #F39C12; }   /* cam */
+.obese2  { width: 40%; background: #CD3700; }
+
+.zone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
 }
 
-.secondary:hover{
-  background:#757575;
+#marker {
+  position: absolute;
+  top: -10px;
+  width: 5px;
+  height: 75px;
+  background: #333;
+  border-radius: 5px;
+  transition: left 0.6s ease;
 }
-
-#ketqua{
-  margin-top:20px;
-  padding:15px;
-  border-radius:12px;
-  background:#f1f7ff;
-  font-size:14px;
-}
-
-body.good{
-  background:#c8f7c5;
-}
-
-body.ok{
-  background:#fff3b0;
-}
-
-body.bad{
-  background:#e57373;
-}
-
-#meo{
-  margin-top:15px;
-  padding:12px;
-  border-radius:12px;
-  background:#e8f5e9;
-  color:#2e7d32;
-}
-
-/* BMI */
-.bmi-bar{
-  position:relative;
-  display:flex;
-  height:55px;
-  border-radius:12px;
-  overflow:hidden;
-  margin-top:20px;
-  font-size:13px;
-  font-weight:600;
-}
-
-.under{width:17%;background:#6EC1E4;}
-.normal{width:13%;background:#8BC34A;}
-.over{width:10%;background:#F4D03F;}
-.obese1{width:20%;background:#F39C12;}
-.obese2{width:40%;background:#CD3700;}
-
-.zone{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:white;
-}
-
-#marker{
-  position:absolute;
-  top:-8px;
-  width:6px;
-  height:70px;
-  background:#222;
-  border-radius:10px;
-  transition:left .5s ease;
-}
-
-/* menu */
 .menu-card{
-  padding:25px;
-  border-radius:20px;
-  cursor:pointer;
-  text-align:center;
-  transition:.3s;
-  margin-top:18px;
+background:#f8fff8;
+padding:25px;
+margin-top:20px;
+border-radius:20px;
+cursor:pointer;
+text-align:center;
+transition:.3s;
+box-shadow:0 4px 12px rgba(0,0,0,0.1);
 }
 
 .menu-card:hover{
-  transform:scale(1.03);
+transform:scale(1.04);
+background:#e8f5e9;
 }
-
-.green{
-  background:#e8f5e9;
-}
-
-.yellow{
-  background:#fff8e1;
-}
-
-/* workout */
+	  
 #workoutBox{
-  margin-top:20px;
-  padding:20px;
-  border-radius:15px;
-  background:#f8fff8;
-  text-align:center;
+margin-top:20px;
+padding:20px;
+border-radius:15px;
+background:#f8fff8;
+text-align:center;
 }
-
-#workoutBox img,
-#workoutBox video{
+#workoutBox img{
   width:220px;
   height:220px;
   object-fit:contain;
   border-radius:18px;
   margin:15px 0;
-  background:white;
+  background:#fff;
   box-shadow:0 8px 20px rgba(0,0,0,0.15);
+  animation: float 2s ease-in-out infinite;
 }
 
-.workout-buttons{
-  display:flex;
-  gap:10px;
-}
-
-.workout-buttons button{
-  flex:1;
+@keyframes float{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-8px);}
 }
 </style>
 </head>
 
 <body>
 
-<!-- HOME -->
 <div class="box" id="home">
+    <h1>🤓 EduHealth 🍀</h1>
+    <p>Chọn chức năng bạn muốn</p>
 
-<h1>🤓 EduHealth 🍀</h1>
-<p>Chọn chức năng bạn muốn</p>
+    <div onclick="openPage('health')" style="
+    background:#e8f5e9;
+    padding:30px;
+    border-radius:20px;
+    margin:20px 0;
+    cursor:pointer;
+    text-align:center;">
+        <h2>🩺 Đánh giá sức khỏe</h2>
+        <p>Tính BMI + đánh giá thói quen sống</p>
+    </div>
 
-<div class="menu-card green" onclick="openPage('health')">
-<h2>🩺 Đánh giá sức khỏe</h2>
-<p>Tính BMI + đánh giá thói quen sống</p>
+    <div onclick="openPage('workout')" style="
+    background:#fff8e1;
+    padding:30px;
+    border-radius:20px;
+    cursor:pointer;
+    text-align:center;">
+        <h2>🏋️ Bài tập sức khỏe</h2>
+        <p>Bài tập theo mục tiêu</p>
+    </div>
 </div>
 
-<div class="menu-card yellow" onclick="openPage('workout')">
-<h2>🏋️ Bài tập sức khỏe</h2>
-<p>Bài tập theo mục tiêu</p>
-</div>
-
-</div>
-
-<!-- HEALTH -->
 <div class="box" id="health" style="display:none;">
+    <button onclick="goHome()">⬅ Quay lại</button>
+    <h1>🤓 EduHealth 🍀 </h1>
+    <p>Nhập thông tin để đánh giá sức khỏe của bạn</p>
 
-<button onclick="goHome()">⬅ Quay lại</button>
+    <label>1.Năm nay bạn bao nhiêu tuổi thế?👶🏻🧒🏻🧑🏻</label>
+    <input id="age" type="number">
+	
+	<label>2.Bạn cao bao nhiêu cm vậy?📏</label> 
+  　 <input id="height" type="number">
+	
+	<label>3.Bạn nặng bao nhiêu kg?🍚</label>
+    <input id="weight" type="number">
+	
+    <label>4.Mỗi ngày bạn uống bao nhiêu ly nước (1 ly ≈ 200 ml)🥤?</label>
+    <input type="number" id="nuoc">
 
-<h1>🤓 EduHealth 🍀</h1>
-<p>Nhập thông tin để đánh giá sức khỏe</p>
+    <label>5.Bạn vận động bao nhiêu phút mỗi ngày(bao gồm cả hoạt động đi bộ, leo cầu thang, làm việc nhà,...)?⛹🏻</label>
+    <input type="number" id="vandong">
 
-<label>1. Tuổi</label>
-<input id="age" type="number">
+    <label>6.Bạn ngủ bao nhiêu tiếng mỗi ngày?😴</label>
+    <input type="number" id="ngu">
 
-<label>2. Chiều cao (cm)</label>
-<input id="height" type="number">
+    <label>7.Bạn thường đi ngủ lúc mấy giờ?🛌🏻 (VD: 22.5 = 22h30)</label>
+    <input type="number" step="0.1" id="gioNgu">
 
-<label>3. Cân nặng (kg)</label>
-<input id="weight" type="number">
+    <label>8.Bạn dùng điện thoại bao nhiêu giờ/ngày?📱</label>
+    <input type="number" id="dt">
 
-<label>4. Số ly nước/ngày</label>
-<input id="nuoc" type="number">
+    <button type="button" onclick="tinhKetQua()">Xem kết quả</button>
+    <button type="button" onclick="lamLai()">Làm lại khảo sát 🔄</button>
 
-<label>5. Số phút vận động/ngày</label>
-<input id="vandong" type="number">
+    <div id="ketqua">
+  <div id="bmiText"></div>
+  <div id="otherResult"></div>
+</div>
 
-<label>6. Số giờ ngủ</label>
-<input id="ngu" type="number">
-
-<label>7. Giờ đi ngủ</label>
-<input id="gioNgu" type="number" step="0.1">
-
-<label>8. Số giờ dùng điện thoại</label>
-<input id="dt" type="number">
-
-<button onclick="tinhKetQua()">Xem kết quả</button>
-<button class="secondary" onclick="lamLai()">Làm lại 🔄</button>
-
-<div id="ketqua"></div>
-
+<!-- ===== THANH BMI ===== -->
 <div class="bmi-bar" id="bmiSection" style="display:none;">
-<div class="zone under">Thiếu cân</div>
-<div class="zone normal">Bình thường</div>
-<div class="zone over">Thừa cân</div>
-<div class="zone obese1">Béo phì</div>
-<div class="zone obese2">Béo phì nặng</div>
-<div id="marker"></div>
+  <div class="zone under">Thiếu cân</div>
+  <div class="zone normal">Bình thường</div>
+  <div class="zone over">Thừa cân</div>
+  <div class="zone obese1">Béo phì</div> 
+  <div class="zone obese2">Béo phì nặng</div>
+
+  <div id="marker"></div>
 </div>
 
 <div id="meo"></div>
-
 </div>
 
-<!-- WORKOUT -->
 <div class="box" id="workout" style="display:none;">
+    <button onclick="goHome()">⬅ Quay lại</button>
 
-<button onclick="goHome()">⬅ Quay lại</button>
+    <h2>🏋️ Bài tập sức khỏe</h2>
 
-<h2>🏋️ Bài tập sức khỏe</h2>
+    <select id="goal" onchange="showWorkout()">
+      <option value="height">📏 Tăng chiều cao</option>
+      <option value="lose">🔥 Giảm mỡ</option>
+      <option value="gain">💪 Tăng cơ</option>
+      <option value="student">📚 Chống mệt mỏi</option>
+    </select>
 
-<select id="goal" onchange="changeGoal()">
-<option value="height">📏 Tăng chiều cao</option>
-<option value="lose">🔥 Giảm mỡ</option>
-<option value="gain">💪 Tăng cơ</option>
-<option value="student">📚 Chống mệt mỏi</option>
-</select>
+    <div id="workoutBox" style="
+    margin-top:20px;
+    padding:20px;
+    border-radius:15px;
+    background:#f8fff8;
+    text-align:center;"></div>
 
-<div id="workoutBox"></div>
+    <button onclick="prevWorkout()">⬅️ Trước</button>
+    <button onclick="nextWorkout()">Tiếp ➡️</button>
+	function nextWorkout(){
+	let goal=document.getElementById("goal").value;
 
-<div class="workout-buttons">
-<button onclick="prevWorkout()">⬅️ Trước</button>
-<button onclick="nextWorkout()">Tiếp ➡️</button>
-</div>
+current++;
 
+if(current >= workouts[goal].length){
+current = 0;
+}
+
+showWorkout();
+}
+
+function prevWorkout(){
+let goal=document.getElementById("goal").value;
+
+current--;
+
+if(current < 0){
+current = workouts[goal].length - 1;
+}
+
+showWorkout();
+}
 </div>
 
 <script>
-
 function openPage(page){
-  home.style.display="none";
-  health.style.display="none";
-  workout.style.display="none";
-
-  document.getElementById(page).style.display="block";
-
-  if(page==="workout"){
-    showWorkout();
-  }
+document.getElementById("home").style.display="none";
+document.getElementById("health").style.display="none";
+document.getElementById("workout").style.display="none";
+document.getElementById(page).style.display="block";
 }
 
 function goHome(){
-  home.style.display="block";
-  health.style.display="none";
-  workout.style.display="none";
+document.getElementById("home").style.display="block";
+document.getElementById("health").style.display="none";
+document.getElementById("workout").style.display="none";
 }
 
-function tinhKetQua(){
+function openPage(page){
+document.getElementById("home").style.display="none";
+document.getElementById("health").style.display="none";
+document.getElementById("workout").style.display="none";
 
-  let age=Number(age.value);
-  let heightCm=Number(height.value);
-  let weight=Number(weight.value);
-  let nuoc=Number(document.getElementById("nuoc").value);
-  let vandong=Number(document.getElementById("vandong").value);
-  let ngu=Number(document.getElementById("ngu").value);
-  let gioNgu=Number(document.getElementById("gioNgu").value);
-  let dt=Number(document.getElementById("dt").value);
+document.getElementById(page).style.display="block";
+}
 
-  if(!age || !heightCm || !weight){
-    alert("Nhập thiếu thông tin 😅");
+function goHome(){
+document.getElementById("home").style.display="block";
+document.getElementById("health").style.display="none";
+document.getElementById("workout").style.display="none";
+}
+function tinhKetQua() {
+  let diem = 0;
+  
+  document.getElementById("bmiSection").style.display = "flex";
+
+  let age = Number(document.getElementById("age").value);
+  let heightCm = Number(document.getElementById("height").value);
+  let weight = Number(document.getElementById("weight").value);
+
+  let nuoc = Number(document.getElementById("nuoc").value);
+  let vandong = Number(document.getElementById("vandong").value);
+  let ngu = Number(document.getElementById("ngu").value);
+  let gioNgu = Number(document.getElementById("gioNgu").value);
+  let dt = Number(document.getElementById("dt").value);
+
+  if (!age || !weight || !heightCm || !nuoc ||isNaN(vandong)|| !ngu || !gioNgu || !dt) {
+    alert("Nhập thiếu thông tin rồi kìa 😠");
     return;
-  }
+  } 
+  if (heightCm < 50 || heightCm > 250) {
+  alert("Chiều cao nhập chưa hợp lý nha 😅");
+  return;
+} 
+  if (age < 0 || age > 100) {
+  alert("Tuổi nhập chưa hợp lý nha 😅");
+  return;
+}
 
-  let diem=0;
+  if (nuoc >= 8) diem += 2;
+  if (vandong >= 30) diem += 2;
+  if (ngu >= 7 && ngu <= 9) diem += 2;
+  if (gioNgu >= 21 && gioNgu <= 23) diem += 2;
+  if (dt <= 4) diem += 2;
 
-  if(nuoc>=8) diem+=2;
-  if(vandong>=30) diem+=2;
-  if(ngu>=7 && ngu<=9) diem+=2;
-  if(gioNgu<=23) diem+=2;
-  if(dt<=4) diem+=2;
+  let heightM = heightCm / 100;
+  let bmi = weight / (heightM * heightM);
+  bmi = bmi.toFixed(1);
+  
+  // ===== DI CHUYỂN VẠCH BMI =====
+let bmiNumber = parseFloat(bmi);
 
-  let bmi=(weight/((heightCm/100)**2)).toFixed(1);
+// Giới hạn hiển thị từ 10 đến 40
+let minBMI = 10;
+let maxBMI = 60;
 
-  let bmiText="";
+let percent = ((bmiNumber - minBMI) / (maxBMI - minBMI)) * 100;
 
-  if(bmi<18.5) bmiText="Thiếu cân";
-  else if(bmi<25) bmiText="Bình thường";
-  else if(bmi<30) bmiText="Thừa cân";
-  else if(bmi<40) bmiText="Béo phì";
-  else bmiText="Béo phì nặng";
+if (percent < 0) percent = 0;
+if (percent > 100) percent = 100;
 
-  bmiSection.style.display="flex";
+document.getElementById("marker").style.left = percent + "%";
 
-  let percent=((bmi-10)/(60-10))*100;
-  percent=Math.max(0,Math.min(100,percent));
+  let bmiText = "";
+  if (bmiNumber < 18.5) bmiText = "Thiếu cân";
+else if (bmiNumber < 25) bmiText = "Bình thường";
+else if (bmiNumber < 30) bmiText = "Thừa cân";
+else if (bmiNumber < 40) bmiText = "Béo phì";
+else if (bmiNumber > 40) bmiText = "Béo phì nặng";
+  
 
-  marker.style.left=`calc(${percent}% - 3px)`;
 
-  let color="bad";
+  // ===== NHẬN XÉT THEO ĐIỂM =====
+  let nhanXet = "";
 
-  if(diem>=8) color="good";
-  else if(diem>=5) color="ok";
+if (diem >= 8) {
 
-  document.body.className=color;
-
-  ketqua.innerHTML=`
-  <p><b>Tuổi:</b> ${age}</p>
-  <p><b>Điểm sức khỏe:</b> ${diem}/10</p>
-  <p><b>BMI:</b> ${bmi} (${bmiText})</p>
-  `;
-
-  const tips=[
-    "💧 Uống đủ nước giúp tập trung tốt hơn.",
-    "😴 Ngủ trước 23h giúp phục hồi cơ thể.",
-    "🏃‍♂️ Đi bộ mỗi ngày giúp tim khỏe hơn.",
-    "📵 Hạn chế điện thoại trước khi ngủ."
+  let tot = [
+    "🌟 Sức khỏe của bạn rất tốt! Hãy tiếp tục duy trì thói quen tuyệt vời này nhé 💚",
+    "🟢 Bạn đang chăm sóc cơ thể rất tốt đó! Cố gắng giữ vững phong độ nha ✨",
+    "💪 Cơ thể bạn đang ở trạng thái lý tưởng. Duy trì đều đặn như vậy là quá đỉnh luôn!"
   ];
 
-  meo.innerHTML=`<b>💡 Mẹo:</b><br>${tips[Math.floor(Math.random()*tips.length)]}`;
+  nhanXet = tot[Math.floor(Math.random() * tot.length)];
+
+} else if (diem >= 5) {
+
+  let on = [
+    "🙂 Sức khỏe của bạn khá ổn, nhưng vẫn còn chỗ để cải thiện đó nha 🌼",
+    "🟡 Bạn đang làm tốt một phần rồi, cố gắng thêm chút nữa là hoàn hảo đó!",
+    "🌱 Tình trạng hiện tại tạm ổn, chỉ cần điều chỉnh vài thói quen nhỏ thôi."
+  ];
+
+  nhanXet = on[Math.floor(Math.random() * on.length)];
+
+} else {
+
+  let chuaTot = [
+    "⚠️ Cơ thể bạn đang cần được quan tâm nhiều hơn đó!",
+    "🔴 Thói quen sinh hoạt hiện tại chưa ổn lắm, nên điều chỉnh sớm nha.",
+    "💛 Đừng lo lắng, bắt đầu thay đổi những thói quen nhỏ từ hôm nay vẫn kịp mà!"
+  ];
+
+  nhanXet = chuaTot[Math.floor(Math.random() * chuaTot.length)];
+}
+  let chiTiet = "";
+
+// ===== NƯỚC =====
+if (nuoc >= 8) {
+
+  let nuocTot = [
+    "✅ Bạn uống đủ nước mỗi ngày, cơ thể sẽ hoạt động rất tốt đó 💧",
+    "👏🏻 Tuyệt vời! Bạn đang cung cấp nước đầy đủ cho cơ thể.",
+    "💦 Thói quen uống nước của bạn rất đáng khen, phải vỗ tay thôi!"
+  ];
+
+  chiTiet += nuocTot[Math.floor(Math.random() * nuocTot.length)] + "<br>";
+
+} else {
+
+  let nuocThieu = [
+    "❌ Bạn uống chưa đủ nước rồi =(((. Nên khoảng 8 ly/ngày nhé 💧",
+    "⚠️ Cơ thể đang hơi thiếu nước đó, nhớ uống nhiều hơn nha.",
+    "🥤 Uống thêm nước mỗi ngày sẽ giúp bạn tập trung và khỏe hơn."
+  ];
+
+  chiTiet += nuocThieu[Math.floor(Math.random() * nuocThieu.length)] + "<br>";
 }
 
-function lamLai(){
 
-  document.querySelectorAll("input").forEach(i=>{
-    i.value="";
+// ===== VẬN ĐỘNG =====
+if (vandong >= 30) {
+
+  let vdTot = [
+    "🏃‍♂️ Bạn vận động đủ mỗi ngày, quá tuyệt, quá giỏi!",
+    "💪 Cơ thể bạn đang được rèn luyện rất tốt, mười diểm =))) .",
+    "👏🏻 Duy trì vận động như vậy là quá chuẩn rồi!"
+  ];
+
+  chiTiet += vdTot[Math.floor(Math.random() * vdTot.length)] + "<br>";
+
+} else {
+
+  let vdThieu = [
+    "❌ Bạn nên vận động ít nhất 30 phút/ngày nha.",
+    "⚠️ Cơ thể cần vận động nhiều hơn đó.",
+    "🚶‍♂️ Vận động ít quá, hãy đi bộ hoặc chơi thể thao, sẽ giúp bạn khỏe hơn."
+  ];
+
+  chiTiet += vdThieu[Math.floor(Math.random() * vdThieu.length)] + "<br>";
+}
+
+
+// ===== NGỦ =====
+if (ngu >= 7 && ngu <= 9) {
+
+  let nguTot = [
+    "😴 Thời gian ngủ của bạn rất hợp lý luôn á.",
+    "🌙 Giấc ngủ của bạn đang ở mức lý tưởng.",
+    "💤 Ngủ đủ giúp bạn học tập hiệu quả hơn đó."
+  ];
+
+  chiTiet += nguTot[Math.floor(Math.random() * nguTot.length)] + "<br>";
+
+} else if (ngu < 7) {
+
+  let nguThieu = [
+    "❌ Bạn ngủ chưa đủ giấc đó.",
+    "⚠️ Thiếu ngủ sẽ làm giảm tập trung.",
+    "🌙 Hãy ngủ sớm và đủ 7–8 tiếng nhé."
+  ];
+
+  chiTiet += nguThieu[Math.floor(Math.random() * nguThieu.length)] + "<br>";
+
+} else {
+
+  let nguNhieu = [
+    "⚠️ Bạn ngủ hơi nhiều rồi đó.",
+    "😅 Ngủ quá lâu cũng không tốt đâu nha.",
+    "⏰ Hãy cân đối lại thời gian ngủ của mình nhé."
+  ];
+
+  chiTiet += nguNhieu[Math.floor(Math.random() * nguNhieu.length)] + "<br>";
+}
+
+
+// ===== GIỜ NGỦ =====
+if (gioNgu <= 23) {
+
+  let gioTot = [
+    "🌙 Bạn có thói quen ngủ sớm, rất tốt, rất đáng khen!",
+    "👏🏻 Ngủ trước 23h giúp cơ thể phục hồi tốt hơn.",
+    "🛌🏻 Giờ ngủ của bạn khá lý tưởng đó."
+  ];
+
+  chiTiet += gioTot[Math.floor(Math.random() * gioTot.length)] + "<br>";
+
+} else {
+
+  let gioTre = [
+    "❌ Bạn đi ngủ hơi muộn rồi nè.",
+    "⚠️ Thức khuya lâu dài sẽ ảnh hưởng sức khỏe của bản thân rất nhiều á.",
+    "🌜 Cố gắng ngủ trước 23h nhé, vì một cơ thể khoẻ mạnh."
+  ];
+
+  chiTiet += gioTre[Math.floor(Math.random() * gioTre.length)] + "<br>";
+}
+
+
+// ===== ĐIỆN THOẠI =====
+if (dt <= 4) {
+
+  let dtTot = [
+    "📱 Thời gian dùng điện thoại của bạn khá hợp lý đấy.",
+    "👏🏻 Bạn kiểm soát màn hình rất tốt, xứng đáng đc khen thưởng.",
+    "👀 Mắt bạn sẽ cảm ơn bạn nhiều lắm đó!"
+  ];
+
+  chiTiet += dtTot[Math.floor(Math.random() * dtTot.length)] + "<br>";
+
+} else {
+
+  let dtNhieu = [
+    "❌ Bạn dùng điện thoại hơi nhiều rồi, mắt của bạn không cảm ơn vì điều đó.",
+    "⚠️ Thời gian màn hình cao có thể ảnh hưởng mắt và giấc ngủ.",
+    "📵 Giảm xuống dưới 4 giờ/ngày sẽ tốt hơn."
+  ];
+
+  chiTiet += dtNhieu[Math.floor(Math.random() * dtNhieu.length)] + "<br>";
+}
+  
+  let bmiAdvice = "";
+ 
+  if (bmiNumber < 18.5) {
+  
+  let  thieuCan = [　
+   "Chỉ số BMI của bạn đang ở mức thiếu cân. Điều này có thể khiến cơ thể dễ mệt mỏi và sức đề kháng kém hơn. Bạn nên ăn đủ 3 bữa chính mỗi ngày, bổ sung thêm bữa phụ với sữa, trứng, cá, thịt và các thực phẩm giàu dinh dưỡng. Đồng thời ngủ đủ giấc và vận động nhẹ nhàng để cơ thể phát triển khỏe mạnh hơn nhé 💛",
+   "Bạn đang hơi nhẹ cân so với chiều cao. Đừng lo quá, chỉ cần cải thiện chế độ ăn uống và sinh hoạt là được. Hãy tăng cường thực phẩm giàu đạm và tinh bột tốt, hạn chế bỏ bữa và cố gắng ngủ trước 23h để cơ thể hấp thu dinh dưỡng tốt hơn nha 🌱",
+   "Bạn đang ở mức thiếu cân. Nên ăn đủ bữa, tăng cường thực phẩm giàu đạm như trứng, cá, thịt, sữa; ngủ đủ giấc và vận động nhẹ để cơ thể phát triển tốt hơn.🍱🥗"
+]; 
+
+  bmiAdvice = thieuCan[Math.floor(Math.random() * thieuCan.length)];
+  }
+  
+  else if (bmiNumber < 25) {
+  
+  let binhThuong = [
+    "Chúc mừng bạn, BMI đang ở mức bình thường và khá cân đối. Điều này cho thấy chế độ ăn uống và sinh hoạt của bạn tương đối ổn định. Hãy tiếp tục duy trì thói quen tốt như uống đủ nước, ngủ đúng giờ và vận động đều đặn để giữ phong độ lâu dài nhé 💚",
+    "Chỉ số BMI của bạn ở mức bình thường. Hãy tiếp tục duy trì chế độ ăn uống lành mạnh, ngủ đủ giấc và tập luyện đều đặn để giữ sức khỏe ổn định. 💪🏻",
+    "Chỉ số cơ thể của bạn đang ở mức lý tưởng. Đây là nền tảng rất tốt cho sức khỏe lâu dài. Đừng quên duy trì chế độ ăn lành mạnh, hạn chế đồ chiên dầu và giữ thói quen vận động mỗi ngày để cơ thể luôn khỏe khoắn nha 🌟"
+  ];
+
+  bmiAdvice = binhThuong[Math.floor(Math.random() * binhThuong.length)];
+}
+  
+ else if (bmiNumber < 30) {
+ 
+ let thuaCan = [
+    "BMI của bạn đang ở mức thừa cân. Nếu duy trì lâu dài có thể ảnh hưởng đến tim mạch và xương khớp. Bạn nên giảm bớt đồ ngọt, nước có gas và thức ăn nhanh. Đồng thời tăng thời gian vận động lên ít nhất 30 phút mỗi ngày như đi bộ, đạp xe hoặc chơi thể thao để cải thiện dần nha 🏃‍♂️",
+    "Bạn đang ở mức thừa cân. Nên hạn chế đồ ăn nhiều dầu mỡ, nước ngọt; tăng cường vận động và xây dựng lối sống lành mạnh hơn. 🥗🏃🏻",
+    "Cơ thể đang hơi vượt mức cân nặng lý tưởng một chút. Đây là thời điểm thích hợp để điều chỉnh lại lối sống. Hãy ăn nhiều rau xanh, trái cây, uống đủ nước và hạn chế ăn khuya. Kiên trì từng chút một sẽ giúp bạn cải thiện rõ rệt đó 💪"
+  ];
+
+  bmiAdvice = thuaCan[Math.floor(Math.random() * thuaCan.length)];
+}
+
+ 　else  if (bmiNumber < 40) { 
+ 
+   let beoPhi = [ 
+   "Chỉ số BMI của bạn đang ở mức béo phì. Điều này có thể làm tăng nguy cơ mắc các bệnh về tim mạch, huyết áp và tiểu đường nếu không điều chỉnh kịp thời. Bạn nên xây dựng kế hoạch ăn uống khoa học hơn: giảm tinh bột xấu, hạn chế đồ chiên rán và tăng cường rau xanh. Đồng thời duy trì vận động đều đặn mỗi ngày để cải thiện sức khỏe lâu dài nhé ❤️",
+   "Bạn đang bị béo phì rồi, không ổn chút nào. Bạn nên tạm biệt những người bạn thức ăn nhanh, nước ngọt và những thực phẩm không lành mạnh đi. Hãy thường xuyên tập thể dục và có chế độ ăn uống lành mạnh, khoa học nhé, tôi tin bạn làm được mà!🍀",
+   "Cơ thể đang ở mức béo phì và cần được quan tâm nghiêm túc hơn. Đừng quá áp lực hay tự ti, quan trọng là bắt đầu thay đổi từ hôm nay. Hãy điều chỉnh khẩu phần ăn, ngủ đủ giấc và tăng cường hoạt động thể chất. Kiên trì từng bước nhỏ sẽ tạo nên sự thay đổi lớn 🌿"
+  ];
+
+  bmiAdvice = beoPhi[Math.floor(Math.random() * beoPhi.length)];
+}
+
+ 　 else {
+ 
+  let beoPhiNang = [
+    "BMI của bạn đang ở mức béo phì nặng. Đây là dấu hiệu cho thấy cơ thể đang chịu nhiều áp lực về sức khỏe. Bạn nên cân nhắc xây dựng chế độ ăn kiểm soát calo hợp lý, hạn chế hoàn toàn đồ uống có đường và thức ăn nhanh. Nếu có thể, hãy tham khảo ý kiến bác sĩ hoặc chuyên gia dinh dưỡng để có kế hoạch phù hợp và an toàn hơn 🩺",
+    "Ô không, bạn đang bị béo phì nặng rồi, bạn nên giảm cân khoa học bằng cách giảm calo từ từ, không nhịn ăn, thay thế tinh bột trắng bằng ngũ cốc nguyên hạt, tăng cường rau xanh/protein nạc, uống 2 lít nước/ngày và vận động nhẹ nhàng (đi bộ, bơi) 60-90 phút/ngày. Chắc chắn bạn sẽ làm được!",
+    "Chỉ số cơ thể đang ở mức cao và cần được cải thiện sớm để tránh những rủi ro lâu dài cho tim mạch và xương khớp. Đừng quá lo lắng, mọi thay đổi đều cần thời gian. Hãy bắt đầu bằng việc đi bộ mỗi ngày, ăn nhiều rau xanh và giảm dần thói quen xấu. Chăm sóc bản thân chính là điều quan trọng nhất lúc này 💚"
+  ];
+
+  bmiAdvice = beoPhiNang[Math.floor(Math.random() * beoPhiNang.length)];
+
+}
+
+  // ===== ĐỔI NỀN THEO ĐIỂM =====
+  document.body.className = "";
+  
+  if (diem >= 8) { 
+  document.body.classList.add("good");
+} else if (diem >= 5) { 
+  document.body.classList.add("ok");
+} else { 
+  document.body.classList.add("bad") 
+}   
+
+  // ===== MẸO NHỎ CHO BẠN =====
+let meoSucKhoe = [
+  "📵 Không dùng điện thoại 30 phút trước khi ngủ giúp não nghỉ ngơi và ngủ sâu hơn.",
+  "🚿 Rửa mặt bằng nước mát 1–2 phút khi buồn ngủ giúp tỉnh táo nhanh hơn cà phê.",
+  "🌬️ Mở cửa sổ 5–10 phút mỗi sáng giúp não nhận đủ oxy, học tập tập trung hơn.",
+  "🪑 Ngồi học 45 phút → đứng dậy vươn vai 1 phút giúp giảm đau lưng và mỏi mắt.",
+  "👀 Áp dụng quy tắc 20–20–20: 20 phút nhìn màn hình → nhìn xa 20 feet trong 20 giây.",
+  "💧 Uống nước khi vừa thấy khát là lúc cơ thể đã thiếu nước rồi đó!",
+  "🧠 Ngủ trước 23h giúp não ghi nhớ bài tốt hơn hôm sau.",
+  "🎒 Mang cặp quá nặng có thể làm cong cột sống – chỉ nên nặng < 10% cân nặng."
+];
+
+let randomMeo = meoSucKhoe[Math.floor(Math.random() * meoSucKhoe.length)];
+
+
+  document.getElementById("ketqua").innerHTML =
+  `<p><b>Tuổi:</b> ${age}</p>
+   <p><b>Điểm:</b> ${diem}/10</p>
+   <p><b>Nhận xét:</b> ${nhanXet}</p>
+   <p><b>Đánh giá thói quen:</b><br>${chiTiet}</p>
+   <p><b>BMI:</b> ${bmi} (${bmiText})</p>
+   <p><b>Lời khuyên:</b> ${bmiAdvice}</p>
+`;
+
+document.getElementById("meo").innerHTML = `
+  <b>💡 Mẹo nhỏ hôm nay:</b><br>${randomMeo}
+`;
+
+}
+
+function lamLai() { 
+// Xóa toàn bộ ô nhập
+  document.querySelectorAll("input").forEach(input => {
+    input.value = "";
   });
 
-  ketqua.innerHTML="";
-  meo.innerHTML="";
-  bmiSection.style.display="none";
-
-  document.body.className="";
+  // Xóa kết quả
+  document.getElementById("ketqua").innerHTML = "";
+  document.getElementById("bmiSection").style.display = "none";
+document.body.className = "";
+document.getElementById("meo").innerHTML = "";
 }
-
-/* workout */
+  
+  /* workout */
 
 const workouts={
-
 height:[
 {
 name:"Hít xà",
 video:"https://raw.githubusercontent.com/nguyennhuquynh0902/hitxa/main/hitxa.mp4",
-desc:"8 cái x 3 lần"
-},
+desc:"8 cái x 3 lần"},
 {
 name:"Nhảy dây",
 video:"https://raw.githubusercontent.com/nguyennhuquynh0902/nhayday/main/nhayday.mp4",
-desc:"10 phút"
-}
+desc:"10 phút"},
+{
+name:"Rắn hổ mang",
+img:"https://raw.githubusercontent.com/nguyennhuquynh0902/EduHealth/main/ranhomang.jpg",
+desc:"45 giây"},
+{
+name:"Calf Stretch",
+video:"https://raw.githubusercontent.com/nguyennhuquynh0902/omtuong/main/omtuong.mp4",
+desc:"30 giây x 3 lần"}
 ],
 
 lose:[
 {
 name:"Gập bụng",
 video:"https://raw.githubusercontent.com/nguyennhuquynh0902/gapbung/main/gapbung.mp4",
-desc:"15 lần"
-},
+desc:"15 lần"},
 {
 name:"Plank",
 img:"https://raw.githubusercontent.com/nguyennhuquynh0902/Plant/main/plant.jpg",
-desc:"45 giây"
-}
+desc:"45 giây"},
+{
+name:"Jumping Jack",
+video:"https://raw.githubusercontent.com/nguyennhuquynh0902/jumpingjack/main/jumpingjack.mp4",
+desc:"35 lần"},
+{
+name:"Chống tay leo núi",
+video:"https://raw.githubusercontent.com/nguyennhuquynh0902/chongtayleonui/main/chongtayleonui.mp4",
+desc:"30 giây x 4 hiệp ( mỗi hiệp nghỉ 30 giây)"}
 ],
 
 gain:[
 {
 name:"Push-up",
 video:"https://raw.githubusercontent.com/nguyennhuquynh0902/hitdat/main/hitdat.mp4",
-desc:"20 lần"
-},
+desc:"20 lần"},
+{
+name:"Plank",
+img:"https://raw.githubusercontent.com/nguyennhuquynh0902/Plant/main/plant.jpg",
+desc:"45 giây"},
+{
+name:"Bicycle Crunches",
+video:"https://raw.githubusercontent.com/nguyennhuquynh0902/xedap/main/xedap.mp4",
+desc:"20 lần (Lưu ý: Không dùng tay kéo căng cổ, hãy dùng lực chính từ cơ bụng để nâng và vặn người)"},
 {
 name:"Squat",
 video:"https://raw.githubusercontent.com/nguyennhuquynh0902/squat/main/squat.mp4",
-desc:"20 lần"
-}
+desc:"20 lần"}
 ],
 
 student:[
 {
 name:"Giãn cổ",
-img:"https://raw.githubusercontent.com/nguyennhuquynh0902/baitapco/main/baitapco.jpg",
-desc:"2 phút"
-},
+img:"https://raw.githubusercontent.com/nguyennhuquynh0902/baitapco/main/baitapco.jpgz",
+desc:"2 phút"},
+{
+name:"Thư giãn mắt",
+img:"https://raw.githubusercontent.com/nguyennhuquynh0902/baitapmat/main/baitapmat.jpg",
+desc:"20 giây"},
 {
 name:"Hít thở sâu",
 video:"https://raw.githubusercontent.com/nguyennhuquynh0902/hitthosau/main/hitthosau.mp4",
-desc:"5 phút"
-}
+desc:"5 phút"}
 ]
-
 };
 
 let current=0;
 
-function changeGoal(){
-  current=0;
-  showWorkout();
-}
-
 function showWorkout(){
+let goal=document.getElementById("goal").value;
+let w=workouts[goal][current];
 
-  let goal=goalSelect();
-  let w=workouts[goal][current];
+let media = "";
 
-  let media="";
-
-  if(w.video){
-    media=`
-    <video autoplay muted loop playsinline controls>
-      <source src="${w.video}" type="video/mp4">
-    </video>`;
-  }
-
-  else{
-    media=`<img src="${w.img}">`;
-  }
-
-  workoutBox.innerHTML=`
-    <h3>${w.name}</h3>
-    ${media}
-    <p>${w.desc}</p>
-  `;
+if(w.video){
+media = `
+<video width="220" autoplay loop muted playsinline>
+<source src="${w.video}" type="video/mp4">
+</video>`;
+}
+else if(w.img){
+media = `<img src="${w.img}" width="220">`;
 }
 
-function goalSelect(){
-  return document.getElementById("goal").value;
+document.getElementById("workoutBox").innerHTML=`
+<h3>${w.name}</h3>
+${media}
+<p>${w.desc}</p>
+`;
 }
-
-function nextWorkout(){
-
-  let goal=goalSelect();
-
-  current++;
-
-  if(current>=workouts[goal].length){
-    current=0;
-  }
-
-  showWorkout();
-}
-
-function prevWorkout(){
-
-  let goal=goalSelect();
-
-  current--;
-
-  if(current<0){
-    current=workouts[goal].length-1;
-  }
-
-  showWorkout();
-}
-
-showWorkout();
-
 </script>
-
 </body>
 </html>
