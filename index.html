@@ -283,7 +283,7 @@ text-align:center;
 
     <h2>🏋️ Bài tập sức khỏe</h2>
 
-    <select id="goal" onchange="showWorkout()">
+    <select id="goal" onchange="changeGoal()">
       <option value="height">📏 Tăng chiều cao</option>
       <option value="lose">🔥 Giảm mỡ</option>
       <option value="gain">💪 Tăng cơ</option>
@@ -730,63 +730,34 @@ desc:"5 phút"}
 ]
 };
 
-let current=0;
-
-function showWorkout(){
-let goal=document.getElementById("goal").value;
-let w=workouts[goal][current];
-
-let media = "";
-
-if(w.video){
-media = `
-<video width="220" autoplay loop muted playsinline>
-<source src="${w.video}" type="video/mp4">
-</video>`;
-}
-else if(w.img){
-media = `<img src="${w.img}" width="220">`;
-}
-
-document.getElementById("workoutBox").innerHTML=`
-<h3>${w.name}</h3>
-${media}
-<p>${w.desc}</p>
-`;
-	function nextWorkout(){
-	let goal=document.getElementById("goal").value;
-
-current++;
-
-if(current >= workouts[goal].length){
-current = 0;
-}
-
-showWorkout();
-}
-
-function prevWorkout(){
-let goal=document.getElementById("goal").value;
-
-current--;
-
-if(current < 0){
-current = workouts[goal].length - 1;
-}
-
-showWorkout();
 let current = 0;
 
-function changeGoal(){
-  current = 0;
-  showWorkout();
+function showWorkout(){
+  let goal = document.getElementById("goal").value;
+  let w = workouts[goal][current];
+
+  let media = "";
+
+  if(w.video){
+    media = `
+      <video width="220" autoplay loop muted playsinline controls>
+        <source src="${w.video}" type="video/mp4">
+      </video>`;
+  } else if(w.img){
+    media = `<img src="${w.img}" width="220">`;
+  }
+
+  document.getElementById("workoutBox").innerHTML = `
+    <h3>${w.name}</h3>
+    ${media}
+    <p>${w.desc}</p>
+  `;
 }
 
 function nextWorkout(){
   let goal = document.getElementById("goal").value;
 
   current++;
-
   if(current >= workouts[goal].length){
     current = 0;
   }
@@ -798,7 +769,6 @@ function prevWorkout(){
   let goal = document.getElementById("goal").value;
 
   current--;
-
   if(current < 0){
     current = workouts[goal].length - 1;
   }
@@ -806,34 +776,14 @@ function prevWorkout(){
   showWorkout();
 }
 
-function showWorkout(){
-
-  let goal = document.getElementById("goal").value;
-  let w = workouts[goal][current];
-
-  let media = "";
-
-  if(w.video){
-    media = `
-    <video width="220" autoplay loop muted playsinline controls>
-      <source src="${w.video}" type="video/mp4">
-    </video>`;
-  }
-
-  else if(w.img){
-    media = `<img src="${w.img}" width="220">`;
-  }
-
-  document.getElementById("workoutBox").innerHTML = `
-    <h3>${w.name}</h3>
-    ${media}
-    <p>${w.desc}</p>
-  `;
+function changeGoal(){
+  current = 0;
+  showWorkout();
 }
 
+// load lần đầu
 showWorkout();
-}
-}
+	
 </script>
 </body>
 </html>
