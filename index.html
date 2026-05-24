@@ -299,38 +299,10 @@ text-align:center;
 
     <button onclick="prevWorkout()">⬅️ Trước</button>
     <button onclick="nextWorkout()">Tiếp ➡️</button>
-	function nextWorkout(){
-	let goal=document.getElementById("goal").value;
-
-current++;
-
-if(current >= workouts[goal].length){
-current = 0;
-}
-
-showWorkout();
-}
-
-function prevWorkout(){
-let goal=document.getElementById("goal").value;
-
-current--;
-
-if(current < 0){
-current = workouts[goal].length - 1;
-}
-
-showWorkout();
-}
+	
 </div>
 
 <script>
-function openPage(page){
-document.getElementById("home").style.display="none";
-document.getElementById("health").style.display="none";
-document.getElementById("workout").style.display="none";
-document.getElementById(page).style.display="block";
-}
 
 function goHome(){
 document.getElementById("home").style.display="block";
@@ -342,15 +314,13 @@ function openPage(page){
 document.getElementById("home").style.display="none";
 document.getElementById("health").style.display="none";
 document.getElementById("workout").style.display="none";
-
 document.getElementById(page).style.display="block";
+if(page === "workout"){
+  current = 0;
+  showWorkout();
+}
 }
 
-function goHome(){
-document.getElementById("home").style.display="block";
-document.getElementById("health").style.display="none";
-document.getElementById("workout").style.display="none";
-}
 function tinhKetQua() {
   let diem = 0;
   
@@ -366,7 +336,7 @@ function tinhKetQua() {
   let gioNgu = Number(document.getElementById("gioNgu").value);
   let dt = Number(document.getElementById("dt").value);
 
-  if (!age || !weight || !heightCm || !nuoc ||isNaN(vandong)|| !ngu || !gioNgu || !dt) {
+  if (!age || !weight || !heightCm || isNaN(nuoc)||isNaN(vandong)|| isNaN(ngu) || !gioNgu || !(dt) {
     alert("Nhập thiếu thông tin rồi kìa 😠");
     return;
   } 
@@ -381,7 +351,7 @@ function tinhKetQua() {
 
   if (nuoc >= 8) diem += 2;
   if (vandong >= 30) diem += 2;
-  if (ngu >= 7 && ngu <= 9) diem += 2;
+  if (ngu >= 7 && ngu <= 10) diem += 2;
   if (gioNgu >= 21 && gioNgu <= 23) diem += 2;
   if (dt <= 4) diem += 2;
 
@@ -394,7 +364,7 @@ let bmiNumber = parseFloat(bmi);
 
 // Giới hạn hiển thị từ 10 đến 40
 let minBMI = 10;
-let maxBMI = 60;
+let maxBMI = 40;
 
 let percent = ((bmiNumber - minBMI) / (maxBMI - minBMI)) * 100;
 
@@ -677,10 +647,11 @@ function lamLai() {
   });
 
   // Xóa kết quả
-  document.getElementById("ketqua").innerHTML = "";
-  document.getElementById("bmiSection").style.display = "none";
+document.getElementById("ketqua").innerHTML = "";
+document.getElementById("bmiSection").style.display = "none";
 document.body.className = "";
 document.getElementById("meo").innerHTML = "";
+document.getElementById("marker").style.left = "0%";
 }
   
   /* workout */
@@ -746,7 +717,7 @@ desc:"20 lần"}
 student:[
 {
 name:"Giãn cổ",
-img:"https://raw.githubusercontent.com/nguyennhuquynh0902/baitapco/main/baitapco.jpgz",
+img:"https://raw.githubusercontent.com/nguyennhuquynh0902/baitapco/main/baitapco.jpg",
 desc:"2 phút"},
 {
 name:"Thư giãn mắt",
@@ -782,6 +753,86 @@ document.getElementById("workoutBox").innerHTML=`
 ${media}
 <p>${w.desc}</p>
 `;
+	function nextWorkout(){
+	let goal=document.getElementById("goal").value;
+
+current++;
+
+if(current >= workouts[goal].length){
+current = 0;
+}
+
+showWorkout();
+}
+
+function prevWorkout(){
+let goal=document.getElementById("goal").value;
+
+current--;
+
+if(current < 0){
+current = workouts[goal].length - 1;
+}
+
+showWorkout();
+let current = 0;
+
+function changeGoal(){
+  current = 0;
+  showWorkout();
+}
+
+function nextWorkout(){
+  let goal = document.getElementById("goal").value;
+
+  current++;
+
+  if(current >= workouts[goal].length){
+    current = 0;
+  }
+
+  showWorkout();
+}
+
+function prevWorkout(){
+  let goal = document.getElementById("goal").value;
+
+  current--;
+
+  if(current < 0){
+    current = workouts[goal].length - 1;
+  }
+
+  showWorkout();
+}
+
+function showWorkout(){
+
+  let goal = document.getElementById("goal").value;
+  let w = workouts[goal][current];
+
+  let media = "";
+
+  if(w.video){
+    media = `
+    <video width="220" autoplay loop muted playsinline controls>
+      <source src="${w.video}" type="video/mp4">
+    </video>`;
+  }
+
+  else if(w.img){
+    media = `<img src="${w.img}" width="220">`;
+  }
+
+  document.getElementById("workoutBox").innerHTML = `
+    <h3>${w.name}</h3>
+    ${media}
+    <p>${w.desc}</p>
+  `;
+}
+
+showWorkout();
+}
 }
 </script>
 </body>
