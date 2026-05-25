@@ -1228,9 +1228,9 @@ Rõ chẳng ngon gì mà sao lại ôm khư khư mãi thế?
 </p>
 `;
 
-setTimeout(() => {
-  document.getElementById("jarBox").innerHTML = "";
-}, 2000);
+setTimeout(()=>{
+document.querySelectorAll("#mentalContent div div div")
+.forEach(e=>e.remove());
 
 document.getElementById("jarText").innerHTML=
 "Tớ ăn hết cảm xúc tiêu cực đó rồi nên cậu phải vui lên biết chưa 💛";
