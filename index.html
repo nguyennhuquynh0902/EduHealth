@@ -1045,7 +1045,13 @@ if(type==="paper"){
 content=`
 <button onclick="goMentalHome()">⬅ Quay lại</button>
 
-<p>${paperDone?
+<p style="
+font-size:20px;
+font-weight:700;
+color:#7a4f01;
+text-align:center;
+line-height:1.5;"> 
+${paperDone?
 "Bạn cảm thấy ổn hơn chưa? Nếu vẫn chưa thì cứ tiếp tục ghi vào tờ giấy này nhé":
 "Bạn đang buồn lắm đúng không? Nếu đúng hãy ghi hết những điều tồi tệ hôm nay vào tờ giấy phía dưới này đi!"}</p>
 
@@ -1071,7 +1077,13 @@ if(type==="jar"){
 content=`
 <button onclick="goMentalHome()">⬅ Quay lại</button>
 
-<p>${jarDone?
+<p style="
+font-size:20px;
+font-weight:700;
+color:#1b4965;
+text-align:center;
+line-height:1.5;">
+${jarDone?
 "Đã thấy ổn hơn chưa? Nếu vẫn chưa thì cứ tiếp tục thả cảm xúc tiêu cực vào lọ đi, để tớ ăn hết cho":
 "Bạn cảm thấy buồn hôm nay sao? Hãy thả emoji vào lọ nhé!"}</p>
 
