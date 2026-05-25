@@ -1228,61 +1228,61 @@ document.getElementById("jarBox").style.position = "relative";
 }
 function finishJar(){
 
-let emojisHTML="";
+  let emojisHTML="";
 
-jarEmojis.forEach((emoji,i)=>{
-emojisHTML+=`
-<div style="
-position:absolute;
-left:${20+Math.random()*40}px;
-top:${20+Math.random()*70}px;
-font-size:28px;">
-${emoji}
-</div>
-`;
-});
+  jarEmojis.forEach((emoji,i)=>{
+    emojisHTML+=`
+    <div style="
+      position:absolute;
+      left:${20+Math.random()*40}px;
+      top:${20+Math.random()*70}px;
+      font-size:28px;">
+      ${emoji}
+    </div>
+    `;
+  });
 
-document.getElementById("mentalContent").innerHTML=`
-<button onclick="goMentalHome()">⬅ Quay lại</button>
+  document.getElementById("mentalContent").innerHTML=`
+  <button onclick="goMentalHome()">⬅ Quay lại</button>
 
-<div style="
-display:flex;
-justify-content:center;
-align-items:center;
-gap:20px;
-animation:eatJar 3s ease;">
+  <div style="
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:20px;
+  animation:eatJar 3s ease;">
 
-<div style="font-size:80px;">✋</div>
+  <div style="font-size:80px;">✋</div>
 
-<div style="
-position:relative;
-width:90px;
-height:130px;
-border:5px solid #8ecae6;
-border-top:15px solid #8ecae6;
-border-radius:20px;
-background:rgba(173,216,230,0.2);">
+  <div style="
+  position:relative;
+  width:90px;
+  height:130px;
+  border:5px solid #8ecae6;
+  border-top:15px solid #8ecae6;
+  border-radius:20px;
+  background:rgba(173,216,230,0.2);">
 
-${emojisHTML}
+  ${emojisHTML}
 
-</div> 
-</div> 
-<p style="font-size:40px;">rộp rộp</p>
-<p id="jarText">  
-Rõ chẳng ngon gì mà sao lại ôm khư khư mãi thế?  
-</p>  
-`;  
-setTimeout(()=>{
-document.querySelectorAll("#mentalContent div div div")
-.forEach(e=>e.remove());
+  </div> 
+  </div> 
+  <p style="font-size:40px;">rộp rộp</p>
+  <p id="jarText">Rõ chẳng ngon gì mà sao lại ôm khư khư mãi thế?</p>  
+  `;
 
-document.getElementById("jarText").innerHTML=
-"Tớ ăn hết cảm xúc tiêu cực đó rồi, nên cậu phải vui lên biết chưa 💛";
-},6000);
-jarDone=true;
-jarEmojis=[];
+  // ⭐ QUAN TRỌNG: reset ngay lập tức
+  jarEmojis = [];
+  document.getElementById("jarBox").innerHTML = "";
 
-setTimeout(()=>openMental("jar"),5000);
+  setTimeout(()=>{
+    document.getElementById("jarText").innerHTML =
+    "Tớ ăn hết cảm xúc tiêu cực đó rồi, nên cậu phải vui lên biết chưa 💛";
+  }, 2000);
+
+  jarDone = true;
+
+  setTimeout(()=>openMental("jar"),5000);
 }
 	
 </script>
@@ -1294,6 +1294,9 @@ setTimeout(()=>openMental("jar"),5000);
 <h2>🧠 Sức khỏe tinh thần</h2>
 
 <div onclick="openMental('jar')" class="menu-card">
+if(type==="jar"){
+  jarEmojis = []; // ⭐ reset khi mở lại
+}
 <div style="
 width:90px;
 height:120px;
