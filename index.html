@@ -1265,28 +1265,20 @@ background:rgba(173,216,230,0.2);">
 
 ${emojisHTML}
 
-</div>
+</div> 
+</div> 
+<p style="font-size:40px;">rộp rộp</p>
+<p id="jarText">  
+Rõ chẳng ngon gì mà sao lại ôm khư khư mãi thế?  
+</p>  
+`;  
+setTimeout(()=>{
+document.querySelectorAll("#mentalContent div div div")
+.forEach(e=>e.remove());
 
-</div>
-
-<p style="font-size:35px;">rộp rộp</p>
-<p id="jarText">
-Rõ chẳng ngon gì mà sao lại ôm khư khư mãi thế?
-</p>
-`;
-document.querySelector("p[style*='rộp']").remove();
-setTimeout(() => {
-  const jar = document.getElementById("jarBox");
-
-  // XÓA TOÀN BỘ EMOJI TRONG LỌ
-  jar.innerHTML = "";
-
-  // reset lại mảng emoji luôn
-  jarEmojis = [];
-
-  document.getElementById("jarText").innerHTML =
-     "Tớ ăn hết cảm xúc tiêu cực đó rồi, nên cậu phải vui lên biết chưa 💛";
-}, 6000);
+document.getElementById("jarText").innerHTML=
+"Tớ ăn hết cảm xúc tiêu cực đó rồi, nên cậu phải vui lên biết chưa 💛";
+},6000);
 jarDone=true;
 jarEmojis=[];
 
