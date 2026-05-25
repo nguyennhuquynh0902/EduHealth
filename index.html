@@ -984,10 +984,12 @@ let jarDone=false;
 
 function openMental(type){
 
+document.getElementById("mentalHome").style.display="none";
+document.getElementById("mentalContent").style.display="block";
+
 let content="";
 
 if(type==="paper"){
-
 content=`
 <button onclick="goMentalHome()">⬅ Quay lại</button>
 
@@ -998,20 +1000,22 @@ content=`
 <textarea id="sadText"
 style="
 width:90%;
-height:200px;
+height:220px;
 padding:20px;
-border-radius:20px;
-font-size:18px;"></textarea>
+border:none;
+border-radius:22px;
+background:#fffef8;
+box-shadow:0 10px 25px rgba(0,0,0,.12);
+font-size:18px;
+resize:none;"></textarea>
 
 <br><br>
 
 <button onclick="finishPaper()">Xong</button>
 `;
-
 }
 
 if(type==="jar"){
-
 content=`
 <button onclick="goMentalHome()">⬅ Quay lại</button>
 
@@ -1020,25 +1024,24 @@ content=`
 "Bạn cảm thấy buồn hôm nay sao? Hãy thả emoji vào lọ nhé!"}</p>
 
 <div id="jarBox" style="
-width:140px;
-height:200px;
+width:160px;
+height:220px;
 margin:auto;
-border:6px solid #8ecae6;
+border:7px solid #8ecae6;
 border-top:18px solid #8ecae6;
-border-radius:25px 25px 35px 35px;
-background:linear-gradient(to bottom,
-rgba(255,255,255,0.8),
-rgba(173,216,230,0.25));
+border-radius:30px;
+background:rgba(255,255,255,.55);
+backdrop-filter:blur(10px);
 box-shadow:
-inset 0 0 20px rgba(255,255,255,0.7),
-0 0 20px rgba(142,202,230,0.5);
+inset 0 0 20px rgba(255,255,255,.7),
+0 12px 30px rgba(0,0,0,.15);
 display:flex;
 justify-content:center;
 align-items:center;
-font-size:50px;
-overflow:hidden;
-transition:.5s;">
+font-size:60px;">
 </div>
+
+<br>
 
 <div>
 <button onclick="dropEmoji('☹️')">☹️ Buồn</button>
@@ -1048,18 +1051,14 @@ transition:.5s;">
 <button onclick="dropEmoji('😣')">😣 Áp lực</button>
 </div>
 
-<br>
-
 <button onclick="finishJar()">Xong</button>
 `;
-
 }
 
 document.getElementById("mentalContent").innerHTML=content;
 }
 
 function goMentalHome(){
-
 document.getElementById("mentalHome").style.display="block";
 document.getElementById("mentalContent").style.display="none";
 document.getElementById("mentalContent").innerHTML="";
@@ -1170,9 +1169,6 @@ setTimeout(()=>openMental("jar"),5000);
 </div>
 </div>
 <div id="mentalContent" style="display:none;"></div>
-</div>
-
-<div id="mentalContent"></div>
 </div>
 </body>
 </html>
