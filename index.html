@@ -348,16 +348,24 @@ function goHome(){
 document.getElementById("home").style.display="block";
 document.getElementById("health").style.display="none";
 document.getElementById("workout").style.display="none";
+document.getElementById("mental").style.display="none";
 }
 
 function openPage(page){
 document.getElementById("home").style.display="none";
 document.getElementById("health").style.display="none";
 document.getElementById("workout").style.display="none";
+document.getElementById("mental").style.display="none";
+
 document.getElementById(page).style.display="block";
-if(page === "workout"){
-  current = 0;
-  showWorkout();
+
+if(page==="workout"){
+current=0;
+showWorkout();
+}
+
+if(page==="mental"){
+goMentalHome();
 }
 }
 
@@ -1105,9 +1113,14 @@ let currentEmoji="";
 
 function dropEmoji(e){
 currentEmoji=e;
-document.getElementById("jarBox").innerHTML="🫙<br>"+e;
+document.getElementById("jarBox").innerHTML = `
+<div style="
+font-size:55px;
+animation:float 1.2s ease-in-out infinite;">
+${e}
+</div>
+`;
 }
-
 function finishJar(){
 
 document.getElementById("mentalContent").innerHTML=`
@@ -1158,15 +1171,26 @@ setTimeout(()=>openMental("jar"),5000);
 
 <h2>🧠 Sức khỏe tinh thần</h2>
 
-<div onclick="openMental('paper')" class="menu-card">
-<div style="font-size:70px;">📄</div>
-<p>Tờ giấy bí mật</p>
+<div onclick="openMental('jar')" class="menu-card">
+<div style="
+width:90px;
+height:120px;
+margin:auto;
+border:5px solid #8ecae6;
+border-top:15px solid #8ecae6;
+border-radius:20px;
+background:linear-gradient(to bottom,
+rgba(255,255,255,0.8),
+rgba(173,216,230,0.25));
+box-shadow:
+inset 0 0 20px rgba(255,255,255,0.7),
+0 0 20px rgba(142,202,230,0.5);">
 </div>
-
+<p>Chiếc lọ thần kì</p>
+</div>
 <div onclick="openMental('jar')" class="menu-card">
 <div style="font-size:70px;">🫙</div>
 <p>Chiếc lọ thần kì</p>
-</div>
 </div>
 <div id="mentalContent" style="display:none;"></div>
 </div>
