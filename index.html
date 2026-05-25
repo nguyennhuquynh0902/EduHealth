@@ -1178,18 +1178,7 @@ font-size:90px;">
 
 </div>
 
-<p style="
-margin-top:20px;
-padding:16px;
-border-radius:16px;
-background:linear-gradient(135deg,#ffffff,#e3f2fd);
-box-shadow:0 6px 15px rgba(0,0,0,0.15);
-font-size:18px;
-font-weight:600;
-text-align:center;
-line-height:1.6;
-animation:fadeIn 6s;
-">
+<p style="animation:fadeIn 6s;">
 Đó, tớ đã vứt nỗi buồn dùm cậu rồi nên hãy vui lên,
 hôm nay trời đã mưa nhưng ngày mai rất có thể trời sẽ nắng 🌤️🌞
 </p>
@@ -1206,22 +1195,24 @@ function dropEmoji(e){
 
 jarEmojis.push(e);
 
-const jar = document.getElementById("jarBox");
+let html="";
 
-// tạo emoji mới
-let div = document.createElement("div");
+jarEmojis.forEach((emoji,i)=>{
+html+=`
+<div style="
+position:absolute;
+left:${20 + Math.random()*70}px;
+top:${30 + Math.random()*120}px;
+font-size:35px;
+animation: float 2s ease-in-out infinite;
+animation-delay:${i*0.2}s;">
+${emoji}
+</div>
+`;
+});
 
-div.innerText = e;
-div.style.position = "absolute";
-div.style.left = (20 + Math.random()*70) + "px";
-div.style.top = "-30px";
-div.style.fontSize = "35px";
-div.style.animation = "fallEmoji 1.2s ease forwards";
-div.style.top = "120px";
-div.style.opacity = "1";
-div.style.animation = "none";
-// thêm vào jar
-jar.appendChild(div);
+document.getElementById("jarBox").innerHTML = html;
+document.getElementById("jarBox").style.position = "relative";
 }
 function finishJar(){
 
@@ -1267,30 +1258,21 @@ ${emojisHTML}
 </div>
 
 <p style="font-size:35px;">rộp rộp</p>
-
-<p id="jarText" style="
-margin-top:20px;
-padding:16px;
-border-radius:16px;
-background:linear-gradient(135deg,#ffffff,#e3f2fd);
-box-shadow:0 6px 15px rgba(0,0,0,0.15);
-font-size:18px;
-font-weight:600;
-text-align:center;
-line-height:1.6;
-animation:fadeIn 2.5s;
-">
+document.querySelector("p[style*='rộp']").remove();
+<p id="jarText">
 Rõ chẳng ngon gì mà sao lại ôm khư khư mãi thế?
 </p>
 `;
 
-setTimeout(()=>{
-document.querySelectorAll("#mentalContent div div div")
-.forEach(e=>e.remove());
+setTimeout(() => {
+  const jar = document.getElementById("jarBox");
 
-document.getElementById("jarText").innerHTML=
-"Tớ ăn hết cảm xúc tiêu cực đó rồi, nên cậu phải vui lên biết chưa 💛";
-},6000);
+  // chỉ xóa emoji trong lọ thôi
+  jar.innerHTML = "";
+
+  document.getElementById("jarText").innerHTML =
+    "Tớ ăn hết cảm xúc tiêu cực đó rồi, nên cậu phải vui lên biết chưa 💛";
+}, 6000);
 
 jarDone=true;
 jarEmojis=[];
