@@ -307,10 +307,11 @@ color:#2e7d32;">
 00:00
 </div>
 
-<button onclick="startTimer()">▶ Bắt đầu</button>
-<button onclick="pauseTimer()">⏸ Tạm dừng</button>
-<button onclick="resetTimer()">🔄 Reset</button>
-	
+<button id="startBtn" onclick="startTimer()">▶ Bắt đầu</button>
+
+<button id="pauseBtn" onclick="pauseTimer()">⏸ Tạm dừng</button>
+
+<button id="resetBtn" onclick="resetTimer()">🔄 Reset</button>
 </div>
 
 <script>
@@ -685,11 +686,17 @@ img:"https://raw.githubusercontent.com/nguyennhuquynh0902/EduHealth/main/ranhoma
 desc:"45 giây",
 time:45
 },
-{
-name:"Calf Stretch",
+{ 
+name:"Calf Stretch Left",
 video:"https://raw.githubusercontent.com/nguyennhuquynh0902/omtuong/main/omtuong.mp4",
-desc:"30 giây x 3 lần",
-time:90
+desc:"30 giây x 2 lần(chân trái để phía sau)",
+time:60
+},
+{ 
+name:"Calf Stretch Right",
+video:"https://raw.githubusercontent.com/nguyennhuquynh0902/omtuong/main/omtuong.mp4",
+desc:"30 giây x 2 lần(chân phải để phía sau)",
+time:60
 }
 ],
 
@@ -794,7 +801,8 @@ function showWorkout(){
       <video width="220" autoplay loop muted playsinline controls>
         <source src="${w.video}" type="video/mp4">
       </video>`;
-  } else if(w.img){
+  } 
+  else if(w.img){
     media = `<img src="${w.img}" width="220">`;
   }
 
@@ -804,11 +812,24 @@ function showWorkout(){
     <p>${w.desc}</p>
   `;
 	if(w.time){
+
 document.getElementById("timerBox").style.display="block";
+
+document.getElementById("startBtn").style.display="inline-block";
+document.getElementById("pauseBtn").style.display="inline-block";
+document.getElementById("resetBtn").style.display="inline-block";
+
 resetTimer();
+
 }
 else{
+
 document.getElementById("timerBox").style.display="none";
+
+document.getElementById("startBtn").style.display="none";
+document.getElementById("pauseBtn").style.display="none";
+document.getElementById("resetBtn").style.display="none";
+
 }
 }
 
@@ -876,7 +897,7 @@ if(!isRest && w.rest){
 
 isRest=true;
 timeLeft=w.rest;
-alert(`Nghỉ hiệp ${currentSet} 😌`);
+alert(`Nghỉ 30 giây giữa hiệp ${currentSet} 😌`);
 
 }
 
@@ -888,7 +909,7 @@ currentSet++;
 if(currentSet<=w.sets){
 
 timeLeft=w.time;
-alert(`Bắt đầu hiệp ${currentSet} 💪`);
+alert(`Bắt đầu hiệp mới ${currentSet} 💪`);
 
 }else{
 
