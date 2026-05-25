@@ -803,6 +803,13 @@ function showWorkout(){
     ${media}
     <p>${w.desc}</p>
   `;
+	if(w.time){
+document.getElementById("timerBox").style.display="block";
+resetTimer();
+}
+else{
+document.getElementById("timerBox").style.display="none";
+}
 }
 
 function nextWorkout(){
@@ -814,6 +821,7 @@ function nextWorkout(){
   }
 
   showWorkout();
+  resetTimer();
 }
 
 function prevWorkout(){
@@ -825,11 +833,13 @@ function prevWorkout(){
   }
 
   showWorkout();
+  resetTimer();
 }
 
 function changeGoal(){
   current = 0;
   showWorkout();
+  resetTimer();
 }
 
 // load lần đầu
