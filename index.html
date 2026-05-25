@@ -1098,7 +1098,7 @@ font-size:90px;">
 
 </div>
 
-<p style="animation:fadeIn 2s;">
+<p style="animation:fadeIn 6s;">
 Đó, tớ đã vứt nỗi buồn dùm cậu rồi nên hãy vui lên,
 hôm nay trời đã mưa nhưng ngày mai rất có thể trời sẽ nắng 🌤️🌞
 </p>
@@ -1109,19 +1109,46 @@ paperDone=true;
 setTimeout(()=>openMental("paper"),5000);
 }
 
-let currentEmoji="";
+let jarEmojis=[];
 
 function dropEmoji(e){
-currentEmoji=e;
-document.getElementById("jarBox").innerHTML = `
+
+jarEmojis.push(e);
+
+let html="";
+
+jarEmojis.forEach((emoji,i)=>{
+html+=`
 <div style="
-font-size:55px;
-animation:float 1.2s ease-in-out infinite;">
-${e}
+position:absolute;
+left:${20+Math.random()*70}px;
+top:${30+Math.random()*120}px;
+font-size:35px;
+animation:float 2s ease-in-out infinite;
+animation-delay:${i*0.2}s;">
+${emoji}
 </div>
 `;
+});
+
+document.getElementById("jarBox").innerHTML=html;
+document.getElementById("jarBox").style.position="relative";
 }
 function finishJar(){
+
+let emojisHTML="";
+
+jarEmojis.forEach((emoji,i)=>{
+emojisHTML+=`
+<div style="
+position:absolute;
+left:${20+Math.random()*40}px;
+top:${20+Math.random()*70}px;
+font-size:28px;">
+${emoji}
+</div>
+`;
+});
 
 document.getElementById("mentalContent").innerHTML=`
 <button onclick="goMentalHome()">⬅ Quay lại</button>
@@ -1136,28 +1163,37 @@ animation:eatJar 3s ease;">
 <div style="font-size:80px;">✋</div>
 
 <div style="
+position:relative;
 width:90px;
 height:130px;
 border:5px solid #8ecae6;
 border-top:15px solid #8ecae6;
 border-radius:20px;
 background:rgba(173,216,230,0.2);">
+
+${emojisHTML}
+
 </div>
 
 </div>
-<p style="
-font-size:40px;
-animation:flash 1s infinite;">
-rộp rộp
-</p>
 
-<p>
+<p style="font-size:40px;">rộp rộp</p>
+
+<p id="jarText">
 Rõ chẳng ngon gì mà sao lại ôm khư khư mãi thế?
-Tớ đã ăn hết cảm xúc tiêu cực đó rồi nên cậu phải vui lên biết chưa 💛
 </p>
 `;
 
+setTimeout(()=>{
+document.querySelectorAll("#mentalContent div div div")
+.forEach(e=>e.remove());
+
+document.getElementById("jarText").innerHTML=
+"Tớ ăn hết cảm xúc tiêu cực đó rồi, nên cậu phải vui lên biết chưa 💛";
+},2000);
+
 jarDone=true;
+jarEmojis=[];
 
 setTimeout(()=>openMental("jar"),5000);
 }
