@@ -837,7 +837,7 @@ desc:"20 lần (Lưu ý: Không dùng tay kéo căng cổ, hãy dùng lực chí
 {
 name:"Squat",
 video:"https://raw.githubusercontent.com/nguyennhuquynh0902/squat/main/squat.mp4",
-desc:"20 lần",
+desc:"20 lần"
 }
 ],
 
@@ -1096,11 +1096,11 @@ font-size:60px;">
 <br>
 
 <div>
-<button onclick="dropEmoji('☹️')">☹️ Buồn bã</button>
-<button onclick="dropEmoji('😡')">😡 Giận</button>
-<button onclick="dropEmoji('😰')">😰 Lo lắng</button>
-<button onclick="dropEmoji('😐')">😐 Cô đơn</button>
-<button onclick="dropEmoji('😣')">😣 Áp lực</button>
+<button class="sad" onclick="dropEmoji('☹️')">☹️ Buồn bã</button>
+<button class="angry" onclick="dropEmoji('😡')">😡 Giận</button>
+<button class="stress" onclick="dropEmoji('😰')">😰 Lo lắng</button>
+<button class="lonely" onclick="dropEmoji('😐')">😐 Cô đơn</button>
+<button class="pressure" onclick="dropEmoji('😣')">😣 Áp lực</button>
 </div>
 
 <button onclick="finishJar()">Xong</button>
@@ -1246,7 +1246,6 @@ setTimeout(()=>openMental("jar"),5000);
 <div class="box" id="mental" style="display:none;">
 
 <div id="mentalHome">
-
 <button onclick="goHome()">⬅ Quay lại</button>
 
 <h2>🧠 Sức khỏe tinh thần</h2>
@@ -1277,10 +1276,5 @@ inset 0 0 20px rgba(255,255,255,0.7),
 <div id="mentalContent" style="display:none;"></div>
 </div>
 </div>
-<button class="angry">😡 Giận</button>
-<button class="sad">☹️ Buồn</button>
-<button class="stress">😰 Lo lắng</button>
-<button class="pressure">😣 Áp lực</button>
-<button class="lonely">😐 Cô đơn</button>
 </body>
 </html>
