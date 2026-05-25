@@ -228,6 +228,38 @@ button:hover {
   transform: scale(1.05);
   opacity: 1;
 }
+@keyframes fallEmoji {
+  0% {
+    transform: translateY(-20px) scale(1);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(120px) scale(0.9);
+    opacity: 1;
+  }
+}
+@keyframes throwPaperSmooth {
+  0% {
+    transform: translate(0,0) rotate(0deg) scale(1);
+    opacity: 1;
+  }
+
+  30% {
+    transform: translate(80px,-60px) rotate(90deg) scale(0.95);
+  }
+
+  60% {
+    transform: translate(180px,10px) rotate(200deg) scale(0.7);
+  }
+
+  100% {
+    transform: translate(260px,90px) rotate(360deg) scale(0.2);
+    opacity: 0;
+  }
+}
 
 /* 😡 Giận */
 button.angry {
@@ -1140,7 +1172,7 @@ position:absolute;
 left:40px;
 top:120px;
 font-size:70px;
-animation:throwPaper 2.5s forwards;">
+animation:throwPaperSmooth 2.8s cubic-bezier(.2,.8,.2,1) forwards;">
 📄
 </div>
 
@@ -1154,7 +1186,18 @@ font-size:90px;">
 
 </div>
 
-<p style="animation:fadeIn 6s;">
+<p style="
+margin-top:20px;
+padding:16px;
+border-radius:16px;
+background:linear-gradient(135deg,#ffffff,#e3f2fd);
+box-shadow:0 6px 15px rgba(0,0,0,0.15);
+font-size:18px;
+font-weight:600;
+text-align:center;
+line-height:1.6;
+animation:fadeIn 6s;
+">
 Đó, tớ đã vứt nỗi buồn dùm cậu rồi nên hãy vui lên,
 hôm nay trời đã mưa nhưng ngày mai rất có thể trời sẽ nắng 🌤️🌞
 </p>
@@ -1177,11 +1220,11 @@ jarEmojis.forEach((emoji,i)=>{
 html+=`
 <div style="
 position:absolute;
-left:${20+Math.random()*70}px;
-top:${30+Math.random()*120}px;
+left:${20 + Math.random()*70}px;
+top:0px;
 font-size:35px;
-animation:float 2s ease-in-out infinite;
-animation-delay:${i*0.2}s;">
+animation: fallEmoji 1.2s ease forwards;
+animation-delay:${i*0.1}s;">
 ${emoji}
 </div>
 `;
@@ -1233,9 +1276,20 @@ ${emojisHTML}
 
 </div>
 
-<p style="font-size:40px;">rộp rộp</p>
+<p style="font-size:35px;">rộp rộp</p>
 
-<p id="jarText">
+<p id="jarText" style="
+margin-top:20px;
+padding:16px;
+border-radius:16px;
+background:linear-gradient(135deg,#ffffff,#e3f2fd);
+box-shadow:0 6px 15px rgba(0,0,0,0.15);
+font-size:18px;
+font-weight:600;
+text-align:center;
+line-height:1.6;
+animation:fadeIn 2.5s;
+">
 Rõ chẳng ngon gì mà sao lại ôm khư khư mãi thế?
 </p>
 `;
@@ -1246,7 +1300,7 @@ document.querySelectorAll("#mentalContent div div div")
 
 document.getElementById("jarText").innerHTML=
 "Tớ ăn hết cảm xúc tiêu cực đó rồi, nên cậu phải vui lên biết chưa 💛";
-},2000);
+},6000);
 
 jarDone=true;
 jarEmojis=[];
