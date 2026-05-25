@@ -196,6 +196,24 @@ text-align:center;
   0%,100%{transform:translateY(0);}
   50%{transform:translateY(-8px);}
 }
+@keyframes throwPaper{
+0%{transform:translate(0,0) rotate(0deg) scale(1);}
+40%{transform:translate(100px,-80px) rotate(120deg) scale(.8);}
+80%{transform:translate(220px,20px) rotate(280deg) scale(.5);}
+100%{transform:translate(260px,80px) rotate(360deg) scale(.1);opacity:0;}
+}
+
+@keyframes eatJar{
+0%{transform:translateX(0);}
+40%{transform:translateX(250px);}
+70%{transform:translateX(250px) rotate(8deg);}
+100%{transform:translateX(0);}
+}
+
+#jarBox{
+filter:drop-shadow(0 0 15px rgba(100,180,255,.6));
+transition:.4s;
+}
 </style>
 </head>
 
@@ -1001,7 +1019,26 @@ content=`
 "Đã thấy ổn hơn chưa? Nếu vẫn chưa thì cứ tiếp tục thả cảm xúc tiêu cực vào lọ đi, để tớ ăn hết cho":
 "Bạn cảm thấy buồn hôm nay sao? Hãy thả emoji vào lọ nhé!"}</p>
 
-<div id="jarBox" style="font-size:100px;">🫙</div>
+<div id="jarBox" style="
+width:140px;
+height:200px;
+margin:auto;
+border:6px solid #8ecae6;
+border-top:18px solid #8ecae6;
+border-radius:25px 25px 35px 35px;
+background:linear-gradient(to bottom,
+rgba(255,255,255,0.8),
+rgba(173,216,230,0.25));
+box-shadow:
+inset 0 0 20px rgba(255,255,255,0.7),
+0 0 20px rgba(142,202,230,0.5);
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:50px;
+overflow:hidden;
+transition:.5s;">
+</div>
 
 <div>
 <button onclick="dropEmoji('☹️')">☹️ Buồn</button>
@@ -1022,6 +1059,9 @@ document.getElementById("mentalContent").innerHTML=content;
 }
 
 function goMentalHome(){
+
+document.getElementById("mentalHome").style.display="block";
+document.getElementById("mentalContent").style.display="none";
 document.getElementById("mentalContent").innerHTML="";
 }
 
@@ -1030,18 +1070,36 @@ function finishPaper(){
 document.getElementById("mentalContent").innerHTML=`
 <button onclick="goMentalHome()">⬅ Quay lại</button>
 
-<div style="font-size:80px;animation:float 1s infinite;">🗑️</div>
-<div style="font-size:60px;">⚪</div>
+<div style="position:relative;height:250px;">
 
-<p>
+<div style="
+position:absolute;
+left:40px;
+top:120px;
+font-size:70px;
+animation:throwPaper 2.5s forwards;">
+📄
+</div>
+
+<div style="
+position:absolute;
+right:20px;
+bottom:10px;
+font-size:90px;">
+🗑️
+</div>
+
+</div>
+
+<p style="animation:fadeIn 2s;">
 Đó, tớ đã vứt nỗi buồn dùm cậu rồi nên hãy vui lên,
-hôm nay trời đã mưa nhưng ngày mai rất có thể có nắng 🌤️
+hôm nay trời đã mưa nhưng ngày mai rất có thể trời sẽ nắng 🌤️🌞
 </p>
 `;
 
 paperDone=true;
 
-setTimeout(()=>openMental("paper"),4000);
+setTimeout(()=>openMental("paper"),5000);
 }
 
 let currentEmoji="";
@@ -1056,9 +1114,30 @@ function finishJar(){
 document.getElementById("mentalContent").innerHTML=`
 <button onclick="goMentalHome()">⬅ Quay lại</button>
 
-<div style="font-size:100px;">✋🫙</div>
+<div style="
+display:flex;
+justify-content:center;
+align-items:center;
+gap:20px;
+animation:eatJar 3s ease;">
 
-<p style="font-size:40px;">rộp rộp</p>
+<div style="font-size:80px;">✋</div>
+
+<div style="
+width:90px;
+height:130px;
+border:5px solid #8ecae6;
+border-top:15px solid #8ecae6;
+border-radius:20px;
+background:rgba(173,216,230,0.2);">
+</div>
+
+</div>
+<p style="
+font-size:40px;
+animation:flash 1s infinite;">
+rộp rộp
+</p>
 
 <p>
 Rõ chẳng ngon gì mà sao lại ôm khư khư mãi thế?
@@ -1068,11 +1147,14 @@ Tớ đã ăn hết cảm xúc tiêu cực đó rồi nên cậu phải vui lên
 
 jarDone=true;
 
-setTimeout(()=>openMental("jar"),4000);
+setTimeout(()=>openMental("jar"),5000);
 }
 	
 </script>
 <div class="box" id="mental" style="display:none;">
+
+<div id="mentalHome">
+
 <button onclick="goHome()">⬅ Quay lại</button>
 
 <h2>🧠 Sức khỏe tinh thần</h2>
@@ -1085,6 +1167,9 @@ setTimeout(()=>openMental("jar"),4000);
 <div onclick="openMental('jar')" class="menu-card">
 <div style="font-size:70px;">🫙</div>
 <p>Chiếc lọ thần kì</p>
+</div>
+</div>
+<div id="mentalContent" style="display:none;"></div>
 </div>
 
 <div id="mentalContent"></div>
