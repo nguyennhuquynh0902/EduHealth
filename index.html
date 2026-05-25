@@ -225,6 +225,16 @@ text-align:center;
         <h2>🏋️ Bài tập sức khỏe</h2>
         <p>Bài tập theo mục tiêu</p>
     </div>
+	<div onclick="openPage('mental')" style="
+background:#e3f2fd;
+padding:30px;
+border-radius:20px;
+margin-top:20px;
+cursor:pointer;
+text-align:center;">
+<h2>🧠 Sức khỏe tinh thần 🍀</h2>
+<p>Tâm sự nỗi buồn</p>
+</div>
 </div>
 
 <div class="box" id="health" style="display:none;">
@@ -951,7 +961,133 @@ isRest=false;
 
 updateTimerDisplay();
 }
+let paperDone=false;
+let jarDone=false;
+
+function openMental(type){
+
+let content="";
+
+if(type==="paper"){
+
+content=`
+<button onclick="goMentalHome()">⬅ Quay lại</button>
+
+<p>${paperDone?
+"Bạn cảm thấy ổn hơn chưa? Nếu vẫn chưa thì cứ tiếp tục ghi vào tờ giấy này nhé":
+"Bạn đang buồn lắm đúng không? Nếu đúng hãy ghi hết những điều tồi tệ hôm nay vào tờ giấy phía dưới này đi!"}</p>
+
+<textarea id="sadText"
+style="
+width:90%;
+height:200px;
+padding:20px;
+border-radius:20px;
+font-size:18px;"></textarea>
+
+<br><br>
+
+<button onclick="finishPaper()">Xong</button>
+`;
+
+}
+
+if(type==="jar"){
+
+content=`
+<button onclick="goMentalHome()">⬅ Quay lại</button>
+
+<p>${jarDone?
+"Đã thấy ổn hơn chưa? Nếu vẫn chưa thì cứ tiếp tục thả cảm xúc tiêu cực vào lọ đi, để tớ ăn hết cho":
+"Bạn cảm thấy buồn hôm nay sao? Hãy thả emoji vào lọ nhé!"}</p>
+
+<div id="jarBox" style="font-size:100px;">🫙</div>
+
+<div>
+<button onclick="dropEmoji('☹️')">☹️ Buồn</button>
+<button onclick="dropEmoji('😡')">😡 Giận</button>
+<button onclick="dropEmoji('😰')">😰 Lo</button>
+<button onclick="dropEmoji('😐')">😐 Trống</button>
+<button onclick="dropEmoji('😣')">😣 Áp lực</button>
+</div>
+
+<br>
+
+<button onclick="finishJar()">Xong</button>
+`;
+
+}
+
+document.getElementById("mentalContent").innerHTML=content;
+}
+
+function goMentalHome(){
+document.getElementById("mentalContent").innerHTML="";
+}
+
+function finishPaper(){
+
+document.getElementById("mentalContent").innerHTML=`
+<button onclick="goMentalHome()">⬅ Quay lại</button>
+
+<div style="font-size:80px;animation:float 1s infinite;">🗑️</div>
+<div style="font-size:60px;">⚪</div>
+
+<p>
+Đó, tớ đã vứt nỗi buồn dùm cậu rồi nên hãy vui lên,
+hôm nay trời đã mưa nhưng ngày mai rất có thể có nắng 🌤️
+</p>
+`;
+
+paperDone=true;
+
+setTimeout(()=>openMental("paper"),4000);
+}
+
+let currentEmoji="";
+
+function dropEmoji(e){
+currentEmoji=e;
+document.getElementById("jarBox").innerHTML="🫙<br>"+e;
+}
+
+function finishJar(){
+
+document.getElementById("mentalContent").innerHTML=`
+<button onclick="goMentalHome()">⬅ Quay lại</button>
+
+<div style="font-size:100px;">✋🫙</div>
+
+<p style="font-size:40px;">rộp rộp</p>
+
+<p>
+Rõ chẳng ngon gì mà sao lại ôm khư khư mãi thế?
+Tớ đã ăn hết cảm xúc tiêu cực đó rồi nên cậu phải vui lên biết chưa 💛
+</p>
+`;
+
+jarDone=true;
+
+setTimeout(()=>openMental("jar"),4000);
+}
 	
 </script>
+<div class="box" id="mental" style="display:none;">
+<button onclick="goHome()">⬅ Quay lại</button>
+
+<h2>🧠 Sức khỏe tinh thần</h2>
+
+<div onclick="openMental('paper')" class="menu-card">
+<div style="font-size:70px;">📄</div>
+<p>Tờ giấy bí mật</p>
+</div>
+
+<div onclick="openMental('jar')" class="menu-card">
+<div style="font-size:70px;">🫙</div>
+<p>Chiếc lọ thần kì</p>
+</div>
+
+<div id="mentalContent"></div>
+</div>
 </body>
 </html>
