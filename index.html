@@ -299,6 +299,17 @@ text-align:center;
 
     <button onclick="prevWorkout()">⬅️ Trước</button>
     <button onclick="nextWorkout()">Tiếp ➡️</button>
+	<div id="timerBox" style="
+margin-top:15px;
+font-size:28px;
+font-weight:bold;
+color:#2e7d32;">
+00:00
+</div>
+
+<button onclick="startTimer()">▶ Bắt đầu</button>
+<button onclick="pauseTimer()">⏸ Tạm dừng</button>
+<button onclick="resetTimer()">🔄 Reset</button>
 	
 </div>
 
@@ -665,15 +676,21 @@ desc:"8 cái x 3 lần"},
 {
 name:"Nhảy dây",
 video:"https://raw.githubusercontent.com/nguyennhuquynh0902/nhayday/main/nhayday.mp4",
-desc:"10 phút"},
+desc:"10 phút",
+time:600
+},
 {
 name:"Rắn hổ mang",
 img:"https://raw.githubusercontent.com/nguyennhuquynh0902/EduHealth/main/ranhomang.jpg",
-desc:"45 giây"},
+desc:"45 giây",
+time:45
+},
 {
 name:"Calf Stretch",
 video:"https://raw.githubusercontent.com/nguyennhuquynh0902/omtuong/main/omtuong.mp4",
-desc:"30 giây x 3 lần"}
+desc:"30 giây x 3 lần",
+time:90
+}
 ],
 
 lose:[
@@ -684,53 +701,87 @@ desc:"15 lần"},
 {
 name:"Plank",
 img:"https://raw.githubusercontent.com/nguyennhuquynh0902/Plant/main/plant.jpg",
-desc:"45 giây"},
-{
-name:"Jumping Jack",
-video:"https://raw.githubusercontent.com/nguyennhuquynh0902/jumpingjack/main/jumpingjack.mp4",
-desc:"35 lần"},
+desc:"45 giây",
+time:45
+},
 {
 name:"Chống tay leo núi",
 video:"https://raw.githubusercontent.com/nguyennhuquynh0902/chongtayleonui/main/chongtayleonui.mp4",
-desc:"30 giây x 4 hiệp ( mỗi hiệp nghỉ 30 giây)"}
+desc:"30 giây x 3 hiệp ( mỗi hiệp nghỉ 30 giây)",
+time:30,
+rest:30,
+sets:3
+},
+{
+name:"Jumping Jack",
+video:"https://raw.githubusercontent.com/nguyennhuquynh0902/jumpingjack/main/jumpingjack.mp4",
+desc:"35 lần"
+},
+{
+name:"Nhảy dây",
+video:"https://raw.githubusercontent.com/nguyennhuquynh0902/nhayday/main/nhayday.mp4",
+desc:"10 phút",
+time:600
+}
 ],
 
 gain:[
 {
 name:"Push-up",
 video:"https://raw.githubusercontent.com/nguyennhuquynh0902/hitdat/main/hitdat.mp4",
-desc:"20 lần"},
+desc:"20 lần"
+},
+{
+name:"Hít xà",
+video:"https://raw.githubusercontent.com/nguyennhuquynh0902/hitxa/main/hitxa.mp4",
+desc:"8 cái x 3 lần"
+},
 {
 name:"Plank",
 img:"https://raw.githubusercontent.com/nguyennhuquynh0902/Plant/main/plant.jpg",
-desc:"45 giây"},
+desc:"45 giây",
+time:45
+},
 {
 name:"Bicycle Crunches",
 video:"https://raw.githubusercontent.com/nguyennhuquynh0902/xedap/main/xedap.mp4",
-desc:"20 lần (Lưu ý: Không dùng tay kéo căng cổ, hãy dùng lực chính từ cơ bụng để nâng và vặn người)"},
+desc:"20 lần (Lưu ý: Không dùng tay kéo căng cổ, hãy dùng lực chính từ cơ bụng để nâng và vặn người)"
+},
 {
 name:"Squat",
 video:"https://raw.githubusercontent.com/nguyennhuquynh0902/squat/main/squat.mp4",
-desc:"20 lần"}
+desc:"20 lần",
+}
 ],
 
 student:[
 {
 name:"Giãn cổ",
 img:"https://raw.githubusercontent.com/nguyennhuquynh0902/baitapco/main/baitapco.jpg",
-desc:"2 phút"},
+desc:"2 phút",
+time:120
+},
 {
 name:"Thư giãn mắt",
 img:"https://raw.githubusercontent.com/nguyennhuquynh0902/baitapmat/main/baitapmat.jpg",
-desc:"20 giây"},
+desc:"40 giây",
+time:40
+},
 {
 name:"Hít thở sâu",
 video:"https://raw.githubusercontent.com/nguyennhuquynh0902/hitthosau/main/hitthosau.mp4",
-desc:"5 phút"}
+desc:"5 phút",
+time:300
+}
 ]
 };
 
 let current = 0;
+let timer;
+let timeLeft = 0;
+let isRunning = false;
+let currentSet = 1;
+let isRest = false;
 
 function showWorkout(){
   let goal = document.getElementById("goal").value;
@@ -783,6 +834,92 @@ function changeGoal(){
 
 // load lần đầu
 showWorkout();
+resetTimer();
+	
+function updateTimerDisplay(){
+let min = Math.floor(timeLeft/60);
+let sec = timeLeft%60;
+
+document.getElementById("timerBox").innerText =
+`${String(min).padStart(2,"0")}:${String(sec).padStart(2,"0")}`;
+}
+
+function startTimer(){
+
+if(isRunning) return;
+
+let goal=document.getElementById("goal").value;
+let w=workouts[goal][current];
+
+isRunning=true;
+
+timer=setInterval(()=>{
+
+if(timeLeft>0){
+
+timeLeft--;
+updateTimerDisplay();
+
+}else{
+
+if(!isRest && w.rest){
+
+isRest=true;
+timeLeft=w.rest;
+alert(`Nghỉ hiệp ${currentSet} 😌`);
+
+}
+
+else if(isRest){
+
+isRest=false;
+currentSet++;
+
+if(currentSet<=w.sets){
+
+timeLeft=w.time;
+alert(`Bắt đầu hiệp ${currentSet} 💪`);
+
+}else{
+
+clearInterval(timer);
+isRunning=false;
+alert("Xong bài tập rồi 🎉");
+
+}
+
+}else{
+
+clearInterval(timer);
+isRunning=false;
+alert("Xong bài tập rồi 🎉");
+
+}
+
+}
+
+},1000);
+}
+
+function pauseTimer(){
+clearInterval(timer);
+isRunning=false;
+}
+
+function resetTimer(){
+
+clearInterval(timer);
+isRunning=false;
+
+let goal=document.getElementById("goal").value;
+let w=workouts[goal][current];
+
+timeLeft=w.time || 60;
+currentSet=1;
+isRest=false;
+
+updateTimerDisplay();
+}
 	
 </script>
 </body>
