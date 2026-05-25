@@ -290,6 +290,10 @@ button.lonely {
   background: #78909c;
   border-color: #546e7a;
 }
+@keyframes wobble {
+  0%,100%{transform:rotate(-5deg);}
+  50%{transform:rotate(5deg);}
+}
 </style>
 </head>
 
@@ -1077,13 +1081,7 @@ if(type==="paper"){
 content=`
 <button onclick="goMentalHome()">⬅ Quay lại</button>
 
-<p style="
-font-size:20px;
-font-weight:700;
-color:#7a4f01;
-text-align:center;
-line-height:1.5;"> 
-${paperDone?
+<p>${paperDone?
 "Bạn cảm thấy ổn hơn chưa? Nếu vẫn chưa thì cứ tiếp tục ghi vào tờ giấy này nhé":
 "Bạn đang buồn lắm đúng không? Nếu đúng hãy ghi hết những điều tồi tệ hôm nay vào tờ giấy phía dưới này đi!"}</p>
 
@@ -1109,13 +1107,7 @@ if(type==="jar"){
 content=`
 <button onclick="goMentalHome()">⬅ Quay lại</button>
 
-<p style="
-font-size:20px;
-font-weight:700;
-color:#1b4965;
-text-align:center;
-line-height:1.5;">
-${jarDone?
+<p>${jarDone?
 "Đã thấy ổn hơn chưa? Nếu vẫn chưa thì cứ tiếp tục thả cảm xúc tiêu cực vào lọ đi, để tớ ăn hết cho":
 "Bạn cảm thấy buồn hôm nay sao? Hãy thả emoji vào lọ nhé!"}</p>
 
@@ -1214,24 +1206,22 @@ function dropEmoji(e){
 
 jarEmojis.push(e);
 
-let html="";
+const jar = document.getElementById("jarBox");
 
-jarEmojis.forEach((emoji,i)=>{
-html+=`
-<div style="
-position:absolute;
-left:${20 + Math.random()*70}px;
-top:0px;
-font-size:35px;
-animation: fallEmoji 1.2s ease forwards;
-animation-delay:${i*0.1}s;">
-${emoji}
-</div>
-`;
-});
+// tạo emoji mới
+let div = document.createElement("div");
 
-document.getElementById("jarBox").innerHTML=html;
-document.getElementById("jarBox").style.position="relative";
+div.innerText = e;
+div.style.position = "absolute";
+div.style.left = (20 + Math.random()*70) + "px";
+div.style.top = "-30px";
+div.style.fontSize = "35px";
+div.style.animation = "fallEmoji 1.2s ease forwards";
+div.style.top = "120px";
+div.style.opacity = "1";
+div.style.animation = "none";
+// thêm vào jar
+jar.appendChild(div);
 }
 function finishJar(){
 
