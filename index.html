@@ -214,6 +214,50 @@ text-align:center;
 filter:drop-shadow(0 0 15px rgba(100,180,255,.6));
 transition:.4s;
 }
+button {
+  color: white;
+  opacity: 0.9;
+  border: 1px solid rgba(0,0,0,0.2);
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-weight: 500;
+  transition: 0.2s;
+}
+
+button:hover {
+  transform: scale(1.05);
+  opacity: 1;
+}
+
+/* 😡 Giận */
+button.angry {
+  background: #d32f2f;
+  border-color: #8b1e1e;
+}
+
+/* ☹️ Buồn */
+button.sad {
+  background: #607d8b;
+  border-color: #37474f;
+}
+
+/* 😰 Lo lắng */
+button.stress {
+  background: #1976d2;
+  border-color: #0d47a1;
+}
+
+/* 😣 Áp lực */
+button.pressure {
+  background: #5e35b1;
+  border-color: #311b92;
+}
+
+/* 😐 Cô đơn */
+button.lonely {
+  background: #78909c;
+  border-color: #546e7a;
+}
 </style>
 </head>
 
@@ -1052,10 +1096,10 @@ font-size:60px;">
 <br>
 
 <div>
-<button onclick="dropEmoji('☹️')">☹️ Buồn</button>
+<button onclick="dropEmoji('☹️')">☹️ Buồn bã</button>
 <button onclick="dropEmoji('😡')">😡 Giận</button>
-<button onclick="dropEmoji('😰')">😰 Lo</button>
-<button onclick="dropEmoji('😐')">😐 Trống</button>
+<button onclick="dropEmoji('😰')">😰 Lo lắng</button>
+<button onclick="dropEmoji('😐')">😐 Cô đơn</button>
 <button onclick="dropEmoji('😣')">😣 Áp lực</button>
 </div>
 
@@ -1233,5 +1277,10 @@ inset 0 0 20px rgba(255,255,255,0.7),
 <div id="mentalContent" style="display:none;"></div>
 </div>
 </div>
+<button class="angry">😡 Giận</button>
+<button class="sad">☹️ Buồn</button>
+<button class="stress">😰 Lo lắng</button>
+<button class="pressure">😣 Áp lực</button>
+<button class="lonely">😐 Cô đơn</button>
 </body>
 </html>
